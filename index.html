@@ -1,0 +1,357 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dial in Consulting</title>
+    <meta name="description" content="Dial in Consulting — appointments, invoices, and idea incubator." />
+    <link rel="icon" href="assets/favicon.svg" />
+    <!-- Tailwind CDN (no build step) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    // Tailwind dark config
+    tailwind.config = { darkMode: 'class' };
+    </script>
+    <style>
+        /* Subtle glassy cards */
+        .glass {
+            background: rgba(30,30,30,.6);
+            backdrop-filter: blur(8px);
+        }
+        /* Simple focus ring */
+        :focus-visible {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+    </style>
+</head>
+<body class="bg-neutral-950 text-neutral-100 min-h-screen selection:bg-neutral-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/favicon.svg" alt="" class="w-8 h-8">
+                <div>
+                    <h1 class="text-xl font-semibold tracking-tight">Dial in Consulting</h1>
+                    <p class="text-xs text-neutral-400">Dark & efficient consulting toolkit</p>
+                </div>
+            </div>
+            <nav class="flex gap-2">
+                <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Home</button>
+                <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button>
+                <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button>
+                <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button>
+                <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main -->
+    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+        <!-- Contact card -->
+        <section class="glass rounded-2xl p-6 border border-neutral-800">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                    <h2 class="text-lg font-medium">Contact</h2>
+                    <p class="text-neutral-300">Jonathan Marlow</p>
+                    <p class="text-neutral-400">
+                        <a class="hover:underline" href="tel:14239121038">423-912-1038</a> &middot;
+                        <a class="hover:underline" href="mailto:jonmarlow@gmail.com">jonmarlow@gmail.com</a>
+                    </p>
+                </div>
+                <div class="flex gap-2">
+                    <a href="mailto:jonmarlow@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Email</a>
+                    <a href="tel:14239121038" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Call</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tabs -->
+        <section class="grid gap-6">
+            <!-- Home -->
+            <div id="tab-home" class="tab-pane glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">Welcome</h2>
+                <p class="text-neutral-300 mb-4">
+                    Book time, check invoices, incubate ideas, and join the free list. All on a single, private page.
+                </p>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <a data-tab-jump="appointments" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                        <h3 class="font-medium mb-1">Appointments</h3>
+                        <p class="text-sm text-neutral-400">Pick a time that works.</p>
+                    </a>
+                    <a data-tab-jump="invoices" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                        <h3 class="font-medium mb-1">Invoices</h3>
+                        <p class="text-sm text-neutral-400">Securely view by ID.</p>
+                    </a>
+                    <a data-tab-jump="ideas" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                        <h3 class="font-medium mb-1">Idea Incubator</h3>
+                        <p class="text-sm text-neutral-400">Capture & refine quickly.</p>
+                    </a>
+                    <a data-tab-jump="subscribe" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                        <h3 class="font-medium mb-1">Subscribe (Free)</h3>
+                        <p class="text-sm text-neutral-400">Updates & resources.</p>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Appointments -->
+            <div id="tab-appointments" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">Appointment Setting</h2>
+                <p class="text-neutral-300 mb-4">Choose a slot via your preferred scheduler.</p>
+                <div class="flex flex-col gap-4">
+                    <a id="bookNow" target="_blank" class="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white w-fit">Book Now</a>
+                    <details class="bg-neutral-900/60 rounded-xl border border-neutral-800 p-4">
+                        <summary class="cursor-pointer text-neutral-200">Embed (optional)</summary>
+                        <div class="mt-4">
+                            <iframe id="schedulerFrame" class="w-full h-[640px] rounded-lg border border-neutral-800"
+                                    src="" loading="lazy" referrerpolicy="no-referrer"></iframe>
+                            <p class="text-xs text-neutral-500 mt-2">Replace the APPOINTMENT_URL in the script to auto-embed.</p>
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <!-- Invoices -->
+            <div id="tab-invoices" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">View Invoice</h2>
+                <p class="text-neutral-300 mb-4">Enter your Invoice ID (e.g., <code class="text-xs">INV-1001</code>).</p>
+                <form id="invoiceForm" class="flex flex-col sm:flex-row gap-3">
+                    <input id="invoiceId" type="text" required placeholder="Invoice ID"
+                           class="w-full sm:w-64 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                    <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">View</button>
+                </form>
+                <div id="invoiceResult" class="mt-4"></div>
+                <p class="text-xs text-neutral-500 mt-6">Update <code>data/invoices.json</code> to publish invoices.</p>
+            </div>
+
+            <!-- Idea Incubator -->
+            <div id="tab-ideas" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">Idea Incubator</h2>
+                <form id="ideaForm" class="grid sm:grid-cols-2 gap-3">
+                    <input id="ideaTitle" required placeholder="Title" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                    <select id="ideaPriority" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>High</option>
+                    </select>
+                    <input id="ideaTags" placeholder="Tags (comma-sep)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                    <textarea id="ideaNotes" rows="3" placeholder="Notes" class="sm:col-span-2 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800"></textarea>
+                    <div class="sm:col-span-2 flex gap-2">
+                        <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" id="addIdeaBtn" type="submit">Add</button>
+                        <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" type="button" id="exportIdeasBtn">Export JSON</button>
+                        <label class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 cursor-pointer">
+                            Import JSON <input id="importIdeasInput" type="file" accept="application/json" class="hidden" />
+                        </label>
+                        <button class="ml-auto px-4 py-2 rounded-lg bg-neutral-900 border border-red-900 text-red-300 hover:bg-neutral-900/60" type="button" id="clearIdeasBtn">Clear All</button>
+                    </div>
+                </form>
+                <div class="mt-6 grid gap-3" id="ideasList"></div>
+            </div>
+
+            <!-- Subscribe (Free) -->
+            <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">Free Subscription</h2>
+                <p class="text-neutral-300 mb-4">Get updates & resources. Your info stays private.</p>
+                <form id="subForm" class="grid sm:grid-cols-3 gap-3">
+                    <input id="subName" placeholder="Name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                    <input id="subEmail" type="email" required placeholder="Email" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                    <button class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">Join</button>
+                </form>
+                <div class="mt-4 flex gap-2">
+                    <button id="exportSubsBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Export CSV</button>
+                    <button id="clearSubsBtn" class="px-3 py-2 rounded-lg bg-neutral-900 border border-red-900 text-red-300 hover:bg-neutral-900/60">Clear</button>
+                </div>
+                <p class="text-xs text-neutral-500 mt-3">
+                    Optional email capture: add your Formspree endpoint in the script (FORMSPREE_ENDPOINT).
+                </p>
+                <ul id="subsList" class="mt-4 text-sm text-neutral-400"></ul>
+            </div>
+        </section>
+
+        <footer class="text-center text-xs text-neutral-500 py-8">
+            © <span id="year"></span> Dial in Consulting — All rights reserved.
+        </footer>
+    </main>
+
+    <!-- App JS -->
+    <script>
+    // ======= CONFIG — EDIT THESE =======
+    const APPOINTMENT_URL = "https://calendly.com/YOUR_USERNAME"; // or your Google Appointment Schedule link
+    const FORMSPREE_ENDPOINT = ""; // e.g., "https://formspree.io/f/xxxxxx" (optional)
+
+    // ======= TABS =======
+    const panes = [...document.querySelectorAll('.tab-pane')];
+    const btns = [...document.querySelectorAll('.tab-btn')];
+    const jumpers = [...document.querySelectorAll('[data-tab-jump]')];
+
+    function showTab(name){
+      panes.forEach(p => p.classList.toggle('hidden', p.id !== 'tab-' + name));
+      btns.forEach(b => b.classList.toggle('bg-neutral-800', b.dataset.tab === name));
+      location.hash = name;
+    }
+    btns.forEach(b => b.addEventListener('click', () => showTab(b.dataset.tab)));
+    jumpers.forEach(j => j.addEventListener('click', () => showTab(j.dataset.tab)));
+    window.addEventListener('hashchange', () => {
+      const t = (location.hash || '#home').slice(1);
+      showTab(t);
+    });
+    showTab((location.hash || '#home').slice(1));
+
+    // ======= HEADER LINKS =======
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ======= APPOINTMENTS =======
+    const bookNow = document.getElementById('bookNow');
+    const schedulerFrame = document.getElementById('schedulerFrame');
+    if (APPOINTMENT_URL) {
+      bookNow.href = APPOINTMENT_URL;
+      schedulerFrame.src = APPOINTMENT_URL;
+    } else {
+      bookNow.classList.add('pointer-events-none','opacity-60');
+    }
+
+    // ======= INVOICES =======
+    const invoiceForm = document.getElementById('invoiceForm');
+    const invoiceIdInput = document.getElementById('invoiceId');
+    const invoiceResult = document.getElementById('invoiceResult');
+
+    async function fetchInvoices(){
+      const res = await fetch('data/invoices.json', {cache: 'no-store'});
+      if(!res.ok) throw new Error('Unable to load invoices.json');
+      return await res.json();
+    }
+
+    invoiceForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = invoiceIdInput.value.trim();
+      invoiceResult.innerHTML = '<p class="text-neutral-400">Loading…</p>';
+      try{
+        const data = await fetchInvoices();
+        const inv = data.invoices.find(x => x.id.toLowerCase() === id.toLowerCase());
+        if(!inv){
+          invoiceResult.innerHTML = '<p class="text-red-400">No invoice found for that ID.</p>';
+          return;
+        }
+        const badge = inv.status === 'Paid' ? 'bg-green-600' : inv.status === 'Due' ? 'bg-yellow-600' : 'bg-neutral-700';
+        invoiceResult.innerHTML = `
+          <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
+            <div class="flex items-center justify-between">
+              <h3 class="font-medium">Invoice ${inv.id}</h3>
+              <span class="px-2 py-1 text-xs rounded ${badge}">${inv.status}</span>
+            </div>
+            <dl class="grid sm:grid-cols-2 gap-2 mt-3 text-sm">
+              <div><dt class="text-neutral-400">Client</dt><dd>${inv.client}</dd></div>
+              <div><dt class="text-neutral-400">Date</dt><dd>${inv.date}</dd></div>
+              <div><dt class="text-neutral-400">Amount</dt><dd>$${Number(inv.amount).toFixed(2)}</dd></div>
+              <div><dt class="text-neutral-400">Due</dt><dd>${inv.dueDate || '—'}</dd></div>
+            </dl>
+            ${inv.pdf ? `<a target="_blank" class="inline-block mt-3 px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" href="${inv.pdf}">Download PDF</a>` : ''}
+          </div>
+        `;
+      }catch(err){
+        invoiceResult.innerHTML = `<p class="text-red-400">${err.message}</p>`;
+      }
+    });
+
+    // ======= IDEA INCUBATOR (localStorage) =======
+    const ideaKey = 'dic:ideas';
+    const ideaForm = document.getElementById('ideaForm');
+    const ideaTitle = document.getElementById('ideaTitle');
+    const ideaPriority = document.getElementById('ideaPriority');
+    const ideaTags = document.getElementById('ideaTags');
+    const ideaNotes = document.getElementById('ideaNotes');
+    const ideasList = document.getElementById('ideasList');
+    const exportIdeasBtn = document.getElementById('exportIdeasBtn');
+    const importIdeasInput = document.getElementById('importIdeasInput');
+    const clearIdeasBtn = document.getElementById('clearIdeasBtn');
+
+    function loadIdeas(){ try { return JSON.parse(localStorage.getItem(ideaKey) || '[]'); } catch { return []; } }
+    function saveIdeas(items){ localStorage.setItem(ideaKey, JSON.stringify(items)); }
+    function renderIdeas(){
+      const items = loadIdeas();
+      if(!items.length){ ideasList.innerHTML = '<p class="text-neutral-400">No ideas yet.</p>'; return; }
+      ideasList.innerHTML = items.map((it,idx)=>`
+        <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
+          <div class="flex items-start justify-between">
+            <div>
+              <h4 class="font-medium">${it.title}</h4>
+              <p class="text-xs text-neutral-400">Priority: ${it.priority} — Tags: ${it.tags || '—'}</p>
+            </div>
+            <button data-del="${idx}" class="text-sm px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700">Delete</button>
+          </div>
+          ${it.notes ? `<p class="mt-2 text-neutral-300 whitespace-pre-wrap">${it.notes}</p>` : ''}
+          <p class="mt-2 text-xs text-neutral-500">Created ${new Date(it.created).toLocaleString()}</p>
+        </div>
+      `).join('');
+      ideasList.querySelectorAll('button[data-del]').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const items = loadIdeas();
+          items.splice(Number(btn.dataset.del),1);
+          saveIdeas(items); renderIdeas();
+        });
+      });
+    }
+    ideaForm.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const item = {
+        title: ideaTitle.value.trim(),
+        priority: ideaPriority.value,
+        tags: ideaTags.value.trim(),
+        notes: ideaNotes.value.trim(),
+        created: Date.now(),
+      };
+      const items = loadIdeas(); items.unshift(item); saveIdeas(items);
+      ideaForm.reset(); renderIdeas();
+    });
+    exportIdeasBtn.addEventListener('click', ()=>{
+      const blob = new Blob([JSON.stringify(loadIdeas(), null, 2)], {type:'application/json'});
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'ideas.json'; a.click();
+    });
+    importIdeasInput.addEventListener('change', async (e)=>{
+      const file = e.target.files[0]; if(!file) return;
+      const txt = await file.text();
+      try { const arr = JSON.parse(txt); if(Array.isArray(arr)){ saveIdeas(arr); renderIdeas(); } } catch {}
+      importIdeasInput.value = '';
+    });
+    clearIdeasBtn.addEventListener('click', ()=>{ if(confirm('Clear all ideas?')) { localStorage.removeItem(ideaKey); renderIdeas(); } });
+    renderIdeas();
+
+    // ======= FREE SUBSCRIPTION (localStorage + optional Formspree) =======
+    const subKey = 'dic:subs';
+    const subForm = document.getElementById('subForm');
+    const subName = document.getElementById('subName');
+    const subEmail = document.getElementById('subEmail');
+    const subsList = document.getElementById('subsList');
+    const exportSubsBtn = document.getElementById('exportSubsBtn');
+    const clearSubsBtn = document.getElementById('clearSubsBtn');
+
+    function loadSubs(){ try { return JSON.parse(localStorage.getItem(subKey) || '[]'); } catch { return []; } }
+    function saveSubs(items){ localStorage.setItem(subKey, JSON.stringify(items)); }
+    function renderSubs(){
+      const items = loadSubs();
+      subsList.innerHTML = items.length ? items.map(s=>`<li>• ${s.name || '(no name)'} — ${s.email}</li>`).join('') : '<li class="text-neutral-400">No subscribers yet.</li>';
+    }
+    subForm.addEventListener('submit', async (e)=>{
+      e.preventDefault();
+      const entry = { name: subName.value.trim(), email: subEmail.value.trim(), ts: Date.now() };
+      const items = loadSubs(); items.unshift(entry); saveSubs(items); renderSubs();
+      // Optional: forward to Formspree
+      if (FORMSPREE_ENDPOINT) {
+        try {
+          await fetch(FORMSPREE_ENDPOINT, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(entry) });
+        } catch {}
+      }
+      subForm.reset();
+      alert('Thanks for subscribing!');
+    });
+    exportSubsBtn.addEventListener('click', ()=>{
+      const rows = [['Name','Email','Timestamp'], ...loadSubs().map(s=>[s.name, s.email, new Date(s.ts).toISOString()])];
+      const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv'}); const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'subscribers.csv'; a.click();
+    });
+    clearSubsBtn.addEventListener('click', ()=>{ if(confirm('Clear all subscribers?')){ localStorage.removeItem(subKey); renderSubs(); }});
+    renderSubs();
+    </script>
+</body>
+</html>

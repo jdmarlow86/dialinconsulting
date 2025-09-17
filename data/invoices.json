@@ -1,0 +1,22 @@
+{
+  "invoices": [
+    {
+      "id": "INV-1001",
+      "client": "Acme Co.",
+      "date": "2025-09-01",
+      "dueDate": "2025-09-30",
+      "amount": 1200,
+      "status": "Due",
+      "pdf": "https://example.com/invoices/INV-1001.pdf"
+    },
+    {
+      "id": "INV-1002",
+      "client": "Bright Labs",
+      "date": "2025-08-15",
+      "dueDate": "2025-09-15",
+      "amount": 800,
+      "status": "Paid",
+      "pdf": ""
+    }
+  ]
+}
