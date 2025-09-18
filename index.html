@@ -41,6 +41,7 @@
                 <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button>
                 <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button>
                 <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button>
+                <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spolight</button>
                 <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button>
             </nav>
         </div>
@@ -92,6 +93,10 @@
                     <a data-tab-jump="ideas" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Idea Incubator</h3>
                         <p class="text-sm text-neutral-400">Capture & refine quickly.</p>
+                    </a>
+                    <a data-tab-jump="spotlight" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                        <h3 class="font-medium mb-1">Subscribe (Free)</h3>
+                        <p class="text-sm text-neutral-400">Updates & resources.</p>
                     </a>
                     <a data-tab-jump="subscribe" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Subscribe (Free)</h3>
@@ -320,6 +325,27 @@
     });
     clearIdeasBtn.addEventListener('click', ()=>{ if(confirm('Clear all ideas?')) { localStorage.removeItem(ideaKey); renderIdeas(); } });
     renderIdeas();
+
+        // ======= SPOTLIGHT (1 subsciber per week) =======
+            <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">Spotlight</h2>
+                <p class="text-neutral-300 mb-4">
+                    Each week we highlight one of our subscribers. Here’s a sample profile:
+                </p>
+                <div class="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 flex flex-col sm:flex-row gap-6">
+                    <img src="https://via.placeholder.com/120" alt="Spotlight photo"
+                        class="w-28 h-28 rounded-full border border-neutral-700 object-cover" />
+                    <div>
+                        <h3 class="text-lg font-medium">Alex Johnson</h3>
+                        <p class="text-neutral-400">alex.johnson@example.com</p>
+                        <p class="text-neutral-400">Specialty: Small Business Strategy</p>
+                        <p class="text-sm text-neutral-500 mt-2">
+                            "Dial in Consulting has helped me refine my business goals and find a clearer path forward."
+                        </p>
+                    </div>
+                </div>
+            </div>
+
 
     // ======= FREE SUBSCRIPTION (localStorage + optional Formspree) =======
     const subKey = 'dic:subs';
