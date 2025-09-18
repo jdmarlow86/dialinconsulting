@@ -60,11 +60,16 @@
                     </p>
                 </div>
                 <div class="flex gap-2">
-                    <a href="mailto:jonmarlow@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Email</a>
-                    <a href="tel:14239121038" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Call</a>
+                    <a href="mailto:jonmarlow@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
+                        Email
+                    </a>
+                    <button data-tab-jump="appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
+                        Schedule
+                    </button>
                 </div>
             </div>
         </section>
+
 
         <!-- Tabs -->
         <section class="grid gap-6">
@@ -176,7 +181,7 @@
     <script>
     // ======= CONFIG — EDIT THESE =======
     const APPOINTMENT_URL = "https://calendly.com/jonmarlow"; // or your Google Appointment Schedule link
-    const FORMSPREE_ENDPOINT = ""; // e.g., "https://formspree.io/f/xxxxxx" (optional)
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeolbynz"; // e.g., "https://formspree.io/f/xxxxxx" (optional)
 
     // ======= TABS =======
     const panes = [...document.querySelectorAll('.tab-pane')];
