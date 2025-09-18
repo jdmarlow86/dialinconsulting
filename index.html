@@ -26,42 +26,23 @@
     </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 min-h-screen selection:bg-neutral-800">
-    <!-- Header -->
-    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
-
-            <!-- Left side: Logo + Title -->
-            <div class="flex items-center gap-3">
-                <img src="assets/favicon.svg" alt="" class="w-8 h-8">
-                <div>
-                    <h1 class="text-xl font-semibold tracking-tight">Dial in Consulting</h1>
-                    <p class="text-xs text-neutral-400">Your business goals</p>
-                </div>
-            </div>
-
-            <!-- Center: Profile + Contact -->
-            <div class="flex items-center gap-3">
-                <img src="assets/profile.jpg"
-                     alt="Your Profile Picture"
-                     class="w-12 h-12 rounded-full border border-neutral-700 shadow-md">
-                <div class="flex flex-col leading-tight">
-                    <span class="text-sm font-medium">Jonathan Marlow</span>
-                    <span class="text-xs text-neutral-400">423-912-1038</span>
-                    <span class="text-xs text-neutral-400">jonmarlow@gmail.com</span>
-                </div>
-            </div>
-
-            <!-- Right side: Navigation -->
-            <nav class="flex gap-2">
-                <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Home</button>
-                <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button>
-                <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button>
-                <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button>
-                <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spotlight</button>
-                <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button>
-            </nav>
-
-        </div>
+    <!-- Header --> 
+    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur"> 
+    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between"> 
+        <div class="flex items-center gap-3"> 
+        <img src="assets/favicon.svg" alt="" class="w-8 h-8"> 
+        <div> <h1 class="text-xl font-semibold tracking-tight">Dial in Consulting</h1> 
+            <p class="text-xs text-neutral-400">Your business goals</p> 
+            </div> </div> 
+        <nav class="flex gap-2"> 
+            <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Home</button> 
+            <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button> 
+            <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button> 
+            <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button> 
+            <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spotlight</button> 
+            <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button> 
+        </nav> 
+        </div> 
     </header>
 
 
@@ -70,14 +51,26 @@
         <!-- Contact card -->
         <section class="glass rounded-2xl p-6 border border-neutral-800">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <div>
-                    <h2 class="text-lg font-medium">Contact</h2>
-                    <p class="text-neutral-300">Jonathan Marlow</p>
-                    <p class="text-neutral-400">
-                        <a class="hover:underline" href="tel:14239121038">423-912-1038</a> &middot;
-                        <a class="hover:underline" href="mailto:jonmarlow@gmail.com">jonmarlow@gmail.com</a>
-                    </p>
+
+                <!-- Left side: Profile picture + contact info -->
+                <div class="flex items-center gap-4">
+                    <!-- Profile Picture -->
+                    <img src="assets/profile.jpg"
+                         alt="Profile Picture"
+                         class="w-16 h-16 rounded-full border border-neutral-700 shadow-md">
+
+                    <!-- Contact Info -->
+                    <div>
+                        <h2 class="text-lg font-medium">Contact</h2>
+                        <p class="text-neutral-300">Jonathan Marlow</p>
+                        <p class="text-neutral-400">
+                            <a class="hover:underline" href="tel:14239121038">423-912-1038</a> &middot;
+                            <a class="hover:underline" href="mailto:jonmarlow@gmail.com">jonmarlow@gmail.com</a>
+                        </p>
+                    </div>
                 </div>
+
+                <!-- Right side: Buttons -->
                 <div class="flex gap-2">
                     <a href="mailto:jonmarlow@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
                         Email
@@ -88,6 +81,8 @@
                 </div>
             </div>
         </section>
+
+
 
 
 
@@ -282,20 +277,20 @@
                 }
                 const badge = inv.status === 'Paid' ? 'bg-green-600' : inv.status === 'Due' ? 'bg-yellow-600' : 'bg-neutral-700';
                 invoiceResult.innerHTML = `
-              <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
-                <div class="flex items-center justify-between">
-                  <h3 class="font-medium">Invoice ${inv.id}</h3>
-                  <span class="px-2 py-1 text-xs rounded ${badge}">${inv.status}</span>
-                </div>
-                <dl class="grid sm:grid-cols-2 gap-2 mt-3 text-sm">
-                  <div><dt class="text-neutral-400">Client</dt><dd>${inv.client}</dd></div>
-                  <div><dt class="text-neutral-400">Date</dt><dd>${inv.date}</dd></div>
-                  <div><dt class="text-neutral-400">Amount</dt><dd>$${Number(inv.amount).toFixed(2)}</dd></div>
-                  <div><dt class="text-neutral-400">Due</dt><dd>${inv.dueDate || '—'}</dd></div>
-                </dl>
-                ${inv.pdf ? `<a target="_blank" class="inline-block mt-3 px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" href="${inv.pdf}">Download PDF</a>` : ''}
-              </div>
-            `;
+                  <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
+                    <div class="flex items-center justify-between">
+                      <h3 class="font-medium">Invoice ${inv.id}</h3>
+                      <span class="px-2 py-1 text-xs rounded ${badge}">${inv.status}</span>
+                    </div>
+                    <dl class="grid sm:grid-cols-2 gap-2 mt-3 text-sm">
+                      <div><dt class="text-neutral-400">Client</dt><dd>${inv.client}</dd></div>
+                      <div><dt class="text-neutral-400">Date</dt><dd>${inv.date}</dd></div>
+                      <div><dt class="text-neutral-400">Amount</dt><dd>$${Number(inv.amount).toFixed(2)}</dd></div>
+                      <div><dt class="text-neutral-400">Due</dt><dd>${inv.dueDate || '—'}</dd></div>
+                    </dl>
+                    ${inv.pdf ? `<a target="_blank" class="inline-block mt-3 px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" href="${inv.pdf}">Download PDF</a>` : ''}
+                  </div>
+                `;
             } catch (err) {
                 invoiceResult.innerHTML = `<p class="text-red-400">${err.message}</p>`;
             }
@@ -319,18 +314,18 @@
             const items = loadIdeas();
             if (!items.length) { ideasList.innerHTML = '<p class="text-neutral-400">No ideas yet.</p>'; return; }
             ideasList.innerHTML = items.map((it, idx) => `
-            <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
-              <div class="flex items-start justify-between">
-                <div>
-                  <h4 class="font-medium">${it.title}</h4>
-                  <p class="text-xs text-neutral-400">Priority: ${it.priority} — Tags: ${it.tags || '—'}</p>
+                <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
+                  <div class="flex items-start justify-between">
+                    <div>
+                      <h4 class="font-medium">${it.title}</h4>
+                      <p class="text-xs text-neutral-400">Priority: ${it.priority} — Tags: ${it.tags || '—'}</p>
+                    </div>
+                    <button data-del="${idx}" class="text-sm px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700">Delete</button>
+                  </div>
+                  ${it.notes ? `<p class="mt-2 text-neutral-300 whitespace-pre-wrap">${it.notes}</p>` : ''}
+                  <p class="mt-2 text-xs text-neutral-500">Created ${new Date(it.created).toLocaleString()}</p>
                 </div>
-                <button data-del="${idx}" class="text-sm px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700">Delete</button>
-              </div>
-              ${it.notes ? `<p class="mt-2 text-neutral-300 whitespace-pre-wrap">${it.notes}</p>` : ''}
-              <p class="mt-2 text-xs text-neutral-500">Created ${new Date(it.created).toLocaleString()}</p>
-            </div>
-          `).join('');
+              `).join('');
             ideasList.querySelectorAll('button[data-del]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const items = loadIdeas();
