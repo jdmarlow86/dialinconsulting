@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dial in Consulting</title>
-    <meta name="description" content="Dial in Consulting � appointments, invoices, and idea incubator." />
+    <meta name="description" content="Dial in Consulting -> appointments, invoices, and idea incubator." />
     <link rel="icon" href="assets/favicon.svg" />
     <!-- Tailwind CDN (no build step) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -81,7 +81,11 @@
                     <a href="#appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
                         Schedule
                     </a>
+                    <button id="supportBtn" class="px-3 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white">
+                        Support
+                    </button>
                 </div>
+
             </div>
         </section>
 
@@ -254,8 +258,36 @@
             </div>
         </section>
 
+        <!-- Support overlay -->
+        <div id="supportCard"
+             class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
+            <div class="glass rounded-2xl p-6 border border-neutral-800 max-w-sm w-full text-center">
+                <h2 class="text-xl font-semibold mb-2 text-amber-300">Thank you for your support!</h2>
+                <p class="text-neutral-300 mb-4">Choose a platform below:</p>
+                <div class="flex flex-col gap-2">
+                    <button data-tab-jump="home"
+                            class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+                        PayPal
+                    </button>
+                    <button data-tab-jump="home"
+                            class="px-4 py-2 rounded-lg bg-green-500 hover:bg-green-400 text-white">
+                        CashApp
+                    </button>
+                    <button data-tab-jump="home"
+                            class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white">
+                        Venmo
+                    </button>
+                </div>
+                <button id="supportClose"
+                        class="mt-4 text-sm text-neutral-400 hover:underline">
+                    Close
+                </button>
+            </div>
+        </div>
+
+
         <footer class="text-center text-xs text-neutral-500 py-8">
-            � <span id="year"></span> Dial in Consulting � All rights reserved.
+            <span id="year"></span> Dial in Consulting,  All rights reserved.
         </footer>
     </main>
 
@@ -699,6 +731,26 @@
         /* Initial render */
         renderPhase();
     </script>
+    <script>// ======= SUPPORT OVERLAY =======
+        const supportBtn = document.getElementById('supportBtn');
+        const supportCard = document.getElementById('supportCard');
+        const supportClose = document.getElementById('supportClose');
 
+        supportBtn?.addEventListener('click', () => {
+            supportCard.classList.remove('hidden');
+        });
+
+        supportClose?.addEventListener('click', () => {
+            supportCard.classList.add('hidden');
+        });
+
+        // Each support option already has data-tab-jump="home"
+        supportCard.querySelectorAll('[data-tab-jump]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                showTab('home');            // reuse your existing tab function
+                supportCard.classList.add('hidden');
+            });
+        });
+    </script>
 </body>
 </html>
