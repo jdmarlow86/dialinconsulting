@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Dial in Consulting</title>
-    <meta name="description" content="Dial in Consulting — appointments, invoices, and idea incubator." />
+    <meta name="description" content="Dial in Consulting ï¿½ appointments, invoices, and idea incubator." />
     <link rel="icon" href="assets/favicon.svg" />
     <!-- Tailwind CDN (no build step) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,23 +26,26 @@
     </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 min-h-screen selection:bg-neutral-800">
-    <!-- Header --> 
-    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur"> 
-    <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between"> 
-        <div class="flex items-center gap-3"> 
-        <img src="assets/favicon.svg" alt="" class="w-8 h-8"> 
-        <div> <h1 class="text-xl font-semibold tracking-tight">Dial in Consulting</h1> 
-            <p class="text-xs text-neutral-400">Your business goals</p> 
-            </div> </div> 
-        <nav class="flex gap-2"> 
-            <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Home</button> 
-            <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button> 
-            <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button> 
-            <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button> 
-            <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spotlight</button> 
-            <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button> 
-        </nav> 
-        </div> 
+    <!-- Header -->
+    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="assets/favicon.svg" alt="" class="w-8 h-8">
+                <div>
+                    <h1 class="text-xl font-semibold tracking-tight">Dial in Consulting</h1>
+                    <p class="text-xs text-neutral-400">Your business goals</p>
+                </div>
+            </div>
+            <nav class="flex gap-2">
+                <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Home</button>
+                <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button>
+                <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button>
+                <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button>
+                <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spotlight</button>
+                <button data-tab="phase" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Phase Management</button>
+                <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button>
+            </nav>
+        </div>
     </header>
 
 
@@ -58,7 +61,7 @@
                     <img src="assets/me-profile.jpeg"
                          alt="Profile Picture"
                          class="w-16 h-16 rounded-full border border-neutral-700 shadow-md">
-                   
+
                     <!-- Contact Info -->
                     <div>
                         <h2 class="text-lg font-medium">Contact</h2>
@@ -175,7 +178,7 @@
             <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
                 <h2 class="text-xl font-semibold mb-2">Spotlight</h2>
                 <p class="text-neutral-300 mb-4">
-                    Each week we highlight one of our subscribers. Here’s a sample profile:
+                    Each week we highlight one of our subscribers. Hereï¿½s a sample profile:
                 </p>
                 <div class="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 flex flex-col sm:flex-row gap-6">
                     <img src="https://via.placeholder.com/120" alt="Spotlight photo"
@@ -190,6 +193,46 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Phase (5-stage manager) -->
+            <div id="tab-phase" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                    <h2 class="text-xl font-semibold">Phase Manager</h2>
+
+                    <div class="flex items-center gap-3">
+                        <label class="text-sm opacity-80">Phase</label>
+                        <select id="phaseSelect" class="bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm">
+                            <option value="idea">1. Idea and POC</option>
+                            <option value="planning">2. Planning and Funding</option>
+                            <option value="marketing">3. Marketing and Launch</option>
+                            <option value="postmortem">4. Post Mortem and Improve</option>
+                            <option value="refine">5. Refine and Dial In</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="mt-4 flex flex-wrap items-center gap-4">
+                    <label class="inline-flex items-center gap-2 cursor-pointer select-none">
+                        <input id="phaseMvp" type="checkbox" class="h-4 w-4 rounded border-neutral-600" />
+                        <span class="text-sm">MVP?</span>
+                    </label>
+
+                    <button id="phaseClearBtn" class="text-xs px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800">
+                        Clear This Phase
+                    </button>
+
+                    <button id="phasePdfBtn"
+                            class="hidden sm:ml-auto text-sm px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow"
+                            title="Generate a PDF including all phases">
+                        Finalize Draft (PDF)
+                    </button>
+                </div>
+
+                <!-- Dynamic fields + resources render here -->
+                <div id="phaseFields" class="mt-6 grid gap-4"></div>
+                <div id="phaseResources" class="mt-4"></div>
+            </div>
+
 
             <!-- Subscribe (Free) -->
             <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
@@ -212,13 +255,13 @@
         </section>
 
         <footer class="text-center text-xs text-neutral-500 py-8">
-            © <span id="year"></span> Dial in Consulting — All rights reserved.
+            ï¿½ <span id="year"></span> Dial in Consulting ï¿½ All rights reserved.
         </footer>
     </main>
 
     <!-- App JS -->
     <script>
-        // ======= CONFIG — EDIT THESE =======
+        // ======= CONFIG ï¿½ EDIT THESE =======
         const APPOINTMENT_URL = "https://calendly.com/jonmarlow"; // or your Google Appointment Schedule link
         const FORMSPREE_ENDPOINT = "https://formspree.io/f/xeolbynz"; // e.g., "https://formspree.io/f/xxxxxx" (optional)
 
@@ -267,7 +310,7 @@
         invoiceForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = invoiceIdInput.value.trim();
-            invoiceResult.innerHTML = '<p class="text-neutral-400">Loading…</p>';
+            invoiceResult.innerHTML = '<p class="text-neutral-400">Loadingï¿½</p>';
             try {
                 const data = await fetchInvoices();
                 const inv = data.invoices.find(x => x.id.toLowerCase() === id.toLowerCase());
@@ -277,20 +320,20 @@
                 }
                 const badge = inv.status === 'Paid' ? 'bg-green-600' : inv.status === 'Due' ? 'bg-yellow-600' : 'bg-neutral-700';
                 invoiceResult.innerHTML = `
-                  <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
-                    <div class="flex items-center justify-between">
-                      <h3 class="font-medium">Invoice ${inv.id}</h3>
-                      <span class="px-2 py-1 text-xs rounded ${badge}">${inv.status}</span>
-                    </div>
-                    <dl class="grid sm:grid-cols-2 gap-2 mt-3 text-sm">
-                      <div><dt class="text-neutral-400">Client</dt><dd>${inv.client}</dd></div>
-                      <div><dt class="text-neutral-400">Date</dt><dd>${inv.date}</dd></div>
-                      <div><dt class="text-neutral-400">Amount</dt><dd>$${Number(inv.amount).toFixed(2)}</dd></div>
-                      <div><dt class="text-neutral-400">Due</dt><dd>${inv.dueDate || '—'}</dd></div>
-                    </dl>
-                    ${inv.pdf ? `<a target="_blank" class="inline-block mt-3 px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" href="${inv.pdf}">Download PDF</a>` : ''}
-                  </div>
-                `;
+                          <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
+                            <div class="flex items-center justify-between">
+                              <h3 class="font-medium">Invoice ${inv.id}</h3>
+                              <span class="px-2 py-1 text-xs rounded ${badge}">${inv.status}</span>
+                            </div>
+                            <dl class="grid sm:grid-cols-2 gap-2 mt-3 text-sm">
+                              <div><dt class="text-neutral-400">Client</dt><dd>${inv.client}</dd></div>
+                              <div><dt class="text-neutral-400">Date</dt><dd>${inv.date}</dd></div>
+                              <div><dt class="text-neutral-400">Amount</dt><dd>$${Number(inv.amount).toFixed(2)}</dd></div>
+                              <div><dt class="text-neutral-400">Due</dt><dd>${inv.dueDate || 'ï¿½'}</dd></div>
+                            </dl>
+                            ${inv.pdf ? `<a target="_blank" class="inline-block mt-3 px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" href="${inv.pdf}">Download PDF</a>` : ''}
+                          </div>
+                        `;
             } catch (err) {
                 invoiceResult.innerHTML = `<p class="text-red-400">${err.message}</p>`;
             }
@@ -314,18 +357,18 @@
             const items = loadIdeas();
             if (!items.length) { ideasList.innerHTML = '<p class="text-neutral-400">No ideas yet.</p>'; return; }
             ideasList.innerHTML = items.map((it, idx) => `
-                <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
-                  <div class="flex items-start justify-between">
-                    <div>
-                      <h4 class="font-medium">${it.title}</h4>
-                      <p class="text-xs text-neutral-400">Priority: ${it.priority} — Tags: ${it.tags || '—'}</p>
-                    </div>
-                    <button data-del="${idx}" class="text-sm px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700">Delete</button>
-                  </div>
-                  ${it.notes ? `<p class="mt-2 text-neutral-300 whitespace-pre-wrap">${it.notes}</p>` : ''}
-                  <p class="mt-2 text-xs text-neutral-500">Created ${new Date(it.created).toLocaleString()}</p>
-                </div>
-              `).join('');
+                        <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
+                          <div class="flex items-start justify-between">
+                            <div>
+                              <h4 class="font-medium">${it.title}</h4>
+                              <p class="text-xs text-neutral-400">Priority: ${it.priority} ï¿½ Tags: ${it.tags || 'ï¿½'}</p>
+                            </div>
+                            <button data-del="${idx}" class="text-sm px-2 py-1 rounded bg-neutral-800 hover:bg-neutral-700">Delete</button>
+                          </div>
+                          ${it.notes ? `<p class="mt-2 text-neutral-300 whitespace-pre-wrap">${it.notes}</p>` : ''}
+                          <p class="mt-2 text-xs text-neutral-500">Created ${new Date(it.created).toLocaleString()}</p>
+                        </div>
+                      `).join('');
             ideasList.querySelectorAll('button[data-del]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const items = loadIdeas();
@@ -374,7 +417,7 @@
         function saveSubs(items) { localStorage.setItem(subKey, JSON.stringify(items)); }
         function renderSubs() {
             const items = loadSubs();
-            subsList.innerHTML = items.length ? items.map(s => `<li>• ${s.name || '(no name)'} — ${s.email}</li>`).join('') : '<li class="text-neutral-400">No subscribers yet.</li>';
+            subsList.innerHTML = items.length ? items.map(s => `<li>ï¿½ ${s.name || '(no name)'} ï¿½ ${s.email}</li>`).join('') : '<li class="text-neutral-400">No subscribers yet.</li>';
         }
         subForm.addEventListener('submit', async (e) => {
             e.preventDefault();
@@ -398,5 +441,264 @@
         clearSubsBtn.addEventListener('click', () => { if (confirm('Clear all subscribers?')) { localStorage.removeItem(subKey); renderSubs(); } });
         renderSubs();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script>
+        /** ========= Phase Screen (Vanilla JS) ========= */
+
+        const { jsPDF } = window.jspdf;
+
+        const PHASES = [
+            {
+                key: "idea",
+                title: "Idea and POC",
+                fields: [
+                    { key: "problem", label: "Problem Statement", type: "textarea", placeholder: "What user pain are we solving?" },
+                    { key: "hypothesis", label: "Hypothesis", type: "textarea", placeholder: "If we do X, users will Y because Z." },
+                    { key: "successCriteria", label: "Success Criteria", type: "textarea", placeholder: "Measurable outcomes for POC" },
+                    { key: "risks", label: "Key Risks/Assumptions", type: "textarea", placeholder: "Unknowns, blockers, technical risks" },
+                    { key: "pocPlan", label: "POC Plan", type: "textarea", placeholder: "Scope, constraints, what to build" },
+                    { key: "pocResult", label: "POC Result", type: "textarea", placeholder: "Evidence from tests / learnings" },
+                ],
+            },
+            {
+                key: "planning",
+                title: "Planning and Funding",
+                fields: [
+                    { key: "scope", label: "Project Scope", type: "textarea", placeholder: "Whatâ€™s in vs out" },
+                    { key: "milestones", label: "Milestones", type: "textarea", placeholder: "Major checkpoints & dates" },
+                    { key: "budget", label: "Budget (USD)", type: "number", placeholder: "Estimated budget" },
+                    { key: "fundingSources", label: "Funding Sources", type: "textarea", placeholder: "Bootstrapped, grants, investors" },
+                    { key: "stakeholders", label: "Stakeholders", type: "textarea", placeholder: "Owners, approvers, contributors" },
+                    { key: "timelineStart", label: "Timeline Start", type: "date" },
+                    { key: "timelineEnd", label: "Timeline End", type: "date" },
+                ],
+            },
+            {
+                key: "marketing",
+                title: "Marketing and Launch",
+                fields: [
+                    { key: "audience", label: "Target Audience", type: "textarea", placeholder: "ICP, personas" },
+                    { key: "valueProp", label: "Value Proposition", type: "textarea", placeholder: "Why us? Clear, short, punchy" },
+                    { key: "channels", label: "Channels", type: "textarea", placeholder: "Email, social, communities, PR" },
+                    { key: "launchDate", label: "Launch Date", type: "date" },
+                    { key: "landingUrl", label: "Landing Page URL", type: "url", placeholder: "https://..." },
+                    { key: "pressKitUrl", label: "Press Kit URL", type: "url", placeholder: "https://..." },
+                    { key: "kpiPlan", label: "Tracking & KPIs", type: "textarea", placeholder: "UTMs, conversions, retention" },
+                ],
+                resources: [
+                    { label: "UTM Builder", href: "https://ga-dev-tools.web.app/campaign-url-builder/" },
+                    { label: "Product Hunt Launch Guide", href: "https://www.producthunt.com/" },
+                    { label: "Mailchimp", href: "https://mailchimp.com/" },
+                    { label: "Meta Ads", href: "https://www.facebook.com/business/ads" },
+                    { label: "Google Ads", href: "https://ads.google.com/" },
+                    { label: "Press Kit Inspiration", href: "https://presskit.page/" },
+                ],
+            },
+            {
+                key: "postmortem",
+                title: "Post Mortem and Improve",
+                fields: [
+                    { key: "wentWell", label: "What Went Well", type: "textarea" },
+                    { key: "didntGoWell", label: "What Didnâ€™t Go Well", type: "textarea" },
+                    { key: "metricsVsTargets", label: "Metrics vs Targets", type: "textarea", placeholder: "Actuals vs goals, insights" },
+                    { key: "rootCauses", label: "Root Causes", type: "textarea" },
+                    { key: "improvements", label: "Improvements", type: "textarea", placeholder: "Concrete changes to make" },
+                    { key: "ownersDates", label: "Owners & Due Dates", type: "textarea", placeholder: "Who, what, by when" },
+                ],
+            },
+            {
+                key: "refine",
+                title: "Refine and Dial In",
+                fields: [
+                    { key: "optFocus", label: "Optimization Focus Areas", type: "textarea", placeholder: "Onboarding, activation, rev, churnâ€¦" },
+                    { key: "experiments", label: "Experiments Planned", type: "textarea", placeholder: "A/B tests, pricing, UX tweaks" },
+                    { key: "nextRelease", label: "Next Release Date", type: "date" },
+                    { key: "notes", label: "Notes", type: "textarea" },
+                ],
+            },
+        ];
+
+        const STORAGE_KEY = "phaseScreenData.v1";
+
+        function defaultPhaseState() { return { mvp: false, values: {} }; }
+
+        function defaultAppState() {
+            return {
+                idea: defaultPhaseState(), planning: defaultPhaseState(), marketing: defaultPhaseState(),
+                postmortem: defaultPhaseState(), refine: defaultPhaseState()
+            };
+        }
+
+        function loadState() {
+            try { return { ...defaultAppState(), ...(JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}")) }; }
+            catch { return defaultAppState(); }
+        }
+        function saveState(state) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        }
+
+        /* DOM refs */
+        const phaseSelect = document.getElementById("phaseSelect");
+        const phaseMvp = document.getElementById("phaseMvp");
+        const phaseFields = document.getElementById("phaseFields");
+        const phaseResources = document.getElementById("phaseResources");
+        const phaseClearBtn = document.getElementById("phaseClearBtn");
+        const phasePdfBtn = document.getElementById("phasePdfBtn");
+
+        /* State */
+        let appState = loadState();
+        let currentKey = phaseSelect.value;
+
+        /* Render helpers */
+        function fieldControlHTML(field, value) {
+            const base = 'w-full bg-neutral-900 border border-neutral-700 rounded-xl px-3 py-2 text-sm';
+            if (field.type === "textarea") {
+                return `<textarea data-field="${field.key}" class="${base} min-h-[120px]" placeholder="${field.placeholder || ""}">${value || ""}</textarea>`;
+            }
+            const type = field.type === "number" ? "number" : field.type;
+            return `<input data-field="${field.key}" class="${base}" type="${type}" placeholder="${field.placeholder || ""}" value="${value || ""}"/>`;
+        }
+
+        function renderPhase() {
+            // Title line
+            const phase = PHASES.find(p => p.key === currentKey);
+            // MVP toggle
+            phaseMvp.checked = !!appState[currentKey].mvp;
+
+            // Fields
+            phaseFields.innerHTML = `
+        <h3 class="text-lg font-medium">${phase.title}</h3>
+        <div class="grid gap-4">
+          ${phase.fields.map(f => {
+                const val = appState[currentKey].values[f.key] || "";
+                return `
+              <div class="grid gap-2">
+                <label class="text-sm opacity-80">${f.label}</label>
+                ${fieldControlHTML(f, val)}
+              </div>
+            `;
+            }).join("")}
+        </div>
+      `;
+
+            // Wire inputs
+            phaseFields.querySelectorAll("[data-field]").forEach(el => {
+                el.addEventListener("input", (e) => {
+                    const k = e.target.getAttribute("data-field");
+                    appState[currentKey].values[k] = e.target.value;
+                    saveState(appState);
+                });
+            });
+
+            // Resources (if any)
+            if (phase.resources && phase.resources.length) {
+                phaseResources.innerHTML = `
+          <div>
+            <h4 class="text-sm font-semibold mb-2">Helpful Resources</h4>
+            <ul class="list-disc pl-5 space-y-1">
+              ${phase.resources.map(r => `
+                <li><a class="text-indigo-400 hover:underline" target="_blank" rel="noreferrer" href="${r.href}">${r.label}</a></li>
+              `).join("")}
+            </ul>
+          </div>
+        `;
+            } else {
+                phaseResources.innerHTML = "";
+            }
+
+            // Finalize button only on Phase 5
+            phasePdfBtn.classList.toggle("hidden", currentKey !== "refine");
+        }
+
+        /* Events */
+        phaseSelect.addEventListener("change", () => {
+            currentKey = phaseSelect.value;
+            renderPhase();
+        });
+
+        phaseMvp.addEventListener("change", () => {
+            appState[currentKey].mvp = phaseMvp.checked;
+            saveState(appState);
+        });
+
+        phaseClearBtn.addEventListener("click", () => {
+            if (!confirm("Clear this phase?")) return;
+            appState[currentKey] = defaultPhaseState();
+            saveState(appState);
+            renderPhase();
+        });
+
+        phasePdfBtn.addEventListener("click", () => {
+            generatePdf();
+        });
+
+        /* PDF generator (all phases) */
+        function generatePdf() {
+            const doc = new jsPDF({ unit: "pt", format: "letter" });
+            const marginX = 56, marginTop = 64;
+            const lineGap = 18, sectionGap = 26, titleGap = 10;
+            let y = marginTop;
+
+            const addHeader = (text) => {
+                doc.setFont("helvetica", "bold"); doc.setFontSize(18);
+                doc.text(text, marginX, y); y += sectionGap;
+            };
+            const addSub = (text) => {
+                doc.setFont("helvetica", "bold"); doc.setFontSize(13);
+                doc.text(text, marginX, y); y += titleGap;
+            };
+            const addText = (label, value) => {
+                doc.setFont("helvetica", "bold"); doc.setFontSize(11);
+                doc.text(label, marginX, y); y += 14;
+
+                doc.setFont("helvetica", "normal"); doc.setFontSize(11);
+                const pageWidth = doc.internal.pageSize.getWidth();
+                const maxWidth = pageWidth - marginX * 2;
+                (doc.splitTextToSize(value || "â€”", maxWidth)).forEach(ln => { doc.text(ln, marginX, y); y += lineGap; });
+                y += 6;
+            };
+            const addMvp = (isMvp) => {
+                doc.setFont("helvetica", "bold"); doc.setFontSize(10);
+                doc.text(`MVP? ${isMvp ? "Yes" : "No"}`, marginX, y); y += sectionGap - 6;
+            };
+            const ensure = (needed = 120) => {
+                const H = doc.internal.pageSize.getHeight();
+                if (y + needed > H - marginTop) { doc.addPage(); y = marginTop; }
+            };
+
+            // Cover
+            doc.setFont("helvetica", "bold"); doc.setFontSize(22);
+            doc.text("Project Phases â€” Draft", marginX, y); y += 28;
+            doc.setFont("helvetica", "normal"); doc.setFontSize(12);
+            doc.text(`Generated: ${new Date().toLocaleString()}`, marginX, y); y += 40;
+
+            // Each phase
+            PHASES.forEach((phase, idx) => {
+                ensure();
+                addHeader(`${idx + 1}. ${phase.title}`);
+                addMvp(!!appState[phase.key].mvp);
+
+                phase.fields.forEach(f => {
+                    ensure(90);
+                    const val = appState[phase.key].values[f.key];
+                    addText(f.label, val);
+                });
+
+                if (phase.resources?.length) {
+                    ensure(80);
+                    addSub("Resources");
+                    doc.setFont("helvetica", "normal"); doc.setFontSize(11);
+                    phase.resources.forEach(r => { ensure(30); doc.text(`â€¢ ${r.label}: ${r.href}`, marginX, y); y += lineGap; });
+                    y += 8;
+                }
+            });
+
+            doc.save("Project-Phases-Draft.pdf");
+        }
+
+        /* Initial render */
+        renderPhase();
+    </script>
+
 </body>
 </html>
