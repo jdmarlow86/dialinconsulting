@@ -11,10 +11,10 @@ supportClose?.addEventListener('click', () => {
     supportCard.classList.add('hidden');
 });
 
-// Each support option already has data-tab-jump="home"
-supportCard.querySelectorAll('[data-tab-jump]').forEach(btn => {
-    btn.addEventListener('click', () => {
-        showTab('home');            // reuse your existing tab function
-        supportCard.classList.add('hidden');
+// Auto-close overlay when a support link is clicked
+supportCard.querySelectorAll('[data-support-link]').forEach(link => {
+    link.addEventListener('click', () => {
+        showTab('home');            // switch back to Welcome tab
+        supportCard.classList.add('hidden'); // hide overlay
     });
 });
