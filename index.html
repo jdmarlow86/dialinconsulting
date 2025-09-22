@@ -182,7 +182,7 @@
             <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
                 <h2 class="text-xl font-semibold mb-2">Spotlight</h2>
                 <p class="text-neutral-300 mb-4">
-                    Each week we highlight one of our subscribers. Here�s a sample profile:
+                    Each week we highlight one of our subscribers. Check them out!
                 </p>
                 <div class="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 flex flex-col sm:flex-row gap-6">
                     <img src="https://via.placeholder.com/120" alt="Spotlight photo"
@@ -196,6 +196,60 @@
                         </p>
                     </div>
                 </div>
+                <!-- Spotlight — Contact + Comments -->
+                <div id="spotlightComments" class="mt-6">
+
+                    <!-- Spotlight contact header -->
+                    <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60 flex flex-col gap-1">
+                        <div class="text-sm text-neutral-400">Spotlight Contact</div>
+                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+                            <strong id="spName" class="text-neutral-100">—</strong>
+                            <a id="spEmail" href="#" class="text-neutral-300 hover:underline">—</a>
+                            <a id="spPhone" href="#" class="text-neutral-300 hover:underline">—</a>
+                            <span id="spSpecialty" class="text-neutral-400">—</span>
+                        </div>
+                    </div>
+
+                    <!-- Owner tools (hidden by default; toggle with Ctrl+Shift+O) -->
+                    <div id="spotlightOwnerTools" class="hidden mt-3 rounded-xl border border-amber-900 bg-amber-950/40 p-3">
+                        <div class="flex flex-wrap items-center gap-2">
+                            <button id="spLogBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-sm">
+                                Log Spotlight (console + history)
+                            </button>
+                            <button id="spClearBtn" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm">
+                                Clear Spotlight (local)
+                            </button>
+                            <span class="text-xs text-amber-300 ml-auto">Owner tools • toggle with Ctrl+Shift+O</span>
+                        </div>
+                        <p id="spOwnerMsg" class="text-xs text-neutral-300 mt-2 hidden"></p>
+                    </div>
+
+                    <!-- Comments list -->
+                    <div id="commentsList" class="mt-4 grid gap-3"></div>
+
+                    <!-- New comment form -->
+                    <form id="commentForm" class="mt-4 grid gap-3">
+                        <div class="grid sm:grid-cols-2 gap-3">
+                            <input id="cmtAuthor" placeholder="Your name"
+                                   class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required />
+                            <input id="cmtEmail" type="email" placeholder="Your email (optional)"
+                                   class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                        </div>
+                        <textarea id="cmtText" rows="3" placeholder="Write a comment…"
+                                  class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required></textarea>
+
+                        <input type="hidden" id="cmtParentId" value="" />
+                        <div class="flex items-center gap-3">
+                            <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Post Comment</button>
+                            <button id="cmtCancelReply" type="button"
+                                    class="hidden text-sm px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">
+                                Cancel Reply
+                            </button>
+                            <span id="cmtReplyInfo" class="hidden text-sm text-neutral-400"></span>
+                        </div>
+                    </form>
+                </div>
+
             </div>
 
             <!-- Phase (5-stage manager) -->
@@ -302,6 +356,6 @@
     <script src="components/main.js"></script>
     <script src="components/PhaseScreen.js"></script>
     <script src="components/Support.js"></script>
-
+    <script src="components/Spotlight.js"></script>
 </body>
 </html>
