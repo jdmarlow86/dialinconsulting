@@ -81,6 +81,22 @@
                     <a href="#appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
                         Schedule
                     </a>
+
+                    <!-- Socials dropdown -->
+                    <div class="relative">
+                        <button id="socialsBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
+                            Socials ▾
+                        </button>
+                        <div id="socialsMenu"
+                             class="hidden absolute right-0 mt-2 w-40 bg-neutral-900 border border-neutral-700 rounded-lg shadow-lg z-10">
+                            <a href="https://discord.gg/7DDpsa5NUb" target="_blank"
+                               class="block px-4 py-2 text-sm hover:bg-neutral-700">Discord</a>
+                            <a href="#" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
+                            <a href="https://bsky.app/profile/drthbane.bsky.social" target="_blank"
+                               class="block px-4 py-2 text-sm hover:bg-neutral-700">BluSky</a>
+                        </div>
+                    </div>
+
                     <button id="supportBtn" class="px-3 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white">
                         Support
                     </button>
@@ -440,6 +456,22 @@
                 const text = card.textContent.toLowerCase();
                 card.style.display = text.includes(q) ? '' : 'none';
             });
+        });
+    </script>
+    <script>
+        // Dropdown toggle logic
+        const socialsBtn = document.getElementById("socialsBtn");
+        const socialsMenu = document.getElementById("socialsMenu");
+
+        socialsBtn.addEventListener("click", () => {
+            socialsMenu.classList.toggle("hidden");
+        });
+
+        // Close dropdown if clicking outside
+        document.addEventListener("click", (e) => {
+            if (!socialsBtn.contains(e.target) && !socialsMenu.contains(e.target)) {
+                socialsMenu.classList.add("hidden");
+            }
         });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
