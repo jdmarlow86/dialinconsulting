@@ -129,6 +129,85 @@
                         <p class="text-sm text-neutral-400">Updates & resources.</p>
                     </a>
                 </div>
+
+                <!-- Resume Builder Section -->
+                <section class="glass rounded-2xl p-6 border border-neutral-800 mt-8">
+                    <h2 class="text-xl font-semibold mb-4">Resume Builder</h2>
+                    <p class="text-neutral-400 mb-6">
+                        Create or refine your professional resume with clean, efficient templates.
+                    </p>
+                    <div class="flex gap-4">
+                        <button id="buildResumeBtn"
+                                class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+                            Build Resume
+                        </button>
+                        <button id="refineResumeBtn"
+                                class="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white">
+                            Refine Resume
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Overlay Modal (shared for build/refine) -->
+                <div id="resumeModal"
+                     class="fixed inset-0 hidden bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
+                    <div class="bg-neutral-900 text-white rounded-xl w-full max-w-2xl p-6 relative">
+                        <button id="closeModal"
+                                class="absolute top-3 right-3 text-neutral-400 hover:text-white text-2xl">
+                            &times;
+                        </button>
+
+                        <!-- Build Mode -->
+                        <div id="buildMode" class="hidden">
+                            <h3 class="text-lg font-semibold mb-4">Build Your Resume</h3>
+                            <form id="resumeForm" class="space-y-4">
+                                <input type="text" placeholder="Full Name"
+                                       class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700" />
+                                <input type="text" placeholder="Email"
+                                       class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700" />
+                                <input type="text" placeholder="Phone"
+                                       class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700" />
+                                <textarea placeholder="Professional Summary"
+                                          class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700"></textarea>
+                                <textarea placeholder="Work Experience"
+                                          class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700"></textarea>
+                                <textarea placeholder="Education"
+                                          class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700"></textarea>
+                                <textarea placeholder="Skills"
+                                          class="w-full px-3 py-2 rounded bg-neutral-800 border border-neutral-700"></textarea>
+                                <button type="button" id="generateResume"
+                                        class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+                                    Generate Resume (PDF)
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Refine Mode -->
+                        <div id="refineMode" class="hidden">
+                            <h3 class="text-lg font-semibold mb-4">Refine Your Resume</h3>
+                            <form id="uploadForm" class="space-y-4">
+                                <input type="file" accept=".pdf,.doc,.docx"
+                                       class="w-full text-neutral-300" />
+                                <button type="button" id="analyzeResume"
+                                        class="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-500 text-white">
+                                    Analyze & Refine
+                                </button>
+                            </form>
+                            <!-- Results -->
+                            <div id="refineResults" class="mt-6 hidden">
+                                <h4 class="text-md font-semibold mb-2">Refinements</h4>
+                                <p class="text-neutral-300 text-sm">
+                                    (GPT analysis results and suggestions will appear here.)
+                                </p>
+                                <button type="button" id="saveRefined"
+                                        class="mt-4 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">
+                                    Save Refined Resume (PDF)
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Resources -->
                 <div class="mt-6 glass rounded-2xl p-6 border border-neutral-800">
                     <div class="flex items-center justify-between gap-4">
@@ -538,6 +617,7 @@
         })();
     </script>
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+    <script src="components/ResumeBuilder.js"></script>
     <script src="components/main.js"></script>
     <script src="components/nav.js"></script>
     <script src="components/PhaseScreen.js"></script>
