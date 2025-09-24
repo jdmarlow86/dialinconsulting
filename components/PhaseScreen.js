@@ -251,5 +251,47 @@ function generatePdf() {
     doc.save("Project-Phases-Draft.pdf");
 }
 
+
+// --- New refs
+    const phasePrevBtn = document.getElementById("phasePrevBtn");
+    const phaseNextBtn = document.getElementById("phaseNextBtn");
+    const phaseStepLabel = document.getElementById("phaseStepLabel");
+
+    // --- Helpers
+    function currentIndex() {
+  return PHASES.findIndex(p => p.key === currentKey);
+}
+
+    function setIndex(i) {
+  const clamped = Math.max(0, Math.min(PHASES.length - 1, i));
+    currentKey = PHASES[clamped].key;
+    phaseSelect.value = currentKey;
+    renderPhase();
+    updateNavButtons();
+}
+
+    function updateNavButtons() {
+  const i = currentIndex();
+    if (phasePrevBtn) phasePrevBtn.disabled = i === 0;
+    if (phaseNextBtn) phaseNextBtn.disabled = i === PHASES.length - 1;
+    if (phaseStepLabel) phaseStepLabel.textContent = `Step ${i + 1} of ${PHASES.length}`;
+}
+
+// --- Events
+if (phasePrevBtn) phasePrevBtn.addEventListener("click", () => setIndex(currentIndex() - 1));
+if (phaseNextBtn) phaseNextBtn.addEventListener("click", () => setIndex(currentIndex() + 1));
+
+// Hook into existing select change to keep buttons/label in sync
+phaseSelect.addEventListener("change", () => {
+  currentKey = phaseSelect.value;
+  renderPhase();
+  updateNavButtons();
+});
+
+// After your first renderPhase() call, also initialize nav state:
+updateNavButtons();
+
+
+
 /* Initial render */
 renderPhase();

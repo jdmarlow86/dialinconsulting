@@ -437,6 +437,24 @@
                     </div>
                 </div>
 
+                <!-- Phase navigator (below the dropdown) -->
+                <div class="mt-2 flex items-center gap-3">
+                    <button id="phasePrevBtn"
+                            class="px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed">
+                        ← Previous
+                    </button>
+
+                    <span id="phaseStepLabel" class="text-sm text-neutral-400">
+                        Step 1 of 5
+                    </span>
+
+                    <button id="phaseNextBtn"
+                            class="px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed">
+                        Next →
+                    </button>
+                </div>
+
+
                 <div class="mt-4 flex flex-wrap items-center gap-4">
                     <label class="inline-flex items-center gap-2 cursor-pointer select-none">
                         <input id="phaseMvp" type="checkbox" class="h-4 w-4 rounded border-neutral-600" />
