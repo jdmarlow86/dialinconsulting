@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>{{name}} — Resume</title>
+    <title>{{name}} ï¿½ Resume</title>
     <link rel="stylesheet" href="{{baseUrl}}/resume.css" />
 </head>
 <body class="two-col">
@@ -10,9 +10,9 @@
         <h1>{{name}}</h1>
         {{#if title}}<h2>{{title}}</h2>{{/if}}
         <p class="contact">
-            {{contact.email}} · {{contact.phone}} · {{contact.location}}
-            {{#if contact.links.length}} ·
-            {{#each contact.links}}<span>{{this}}</span>{{#unless @last}} · {{/unless}}{{/each}}
+            {{contact.email}} ï¿½ {{contact.phone}} ï¿½ {{contact.location}}
+            {{#if contact.links.length}} ï¿½
+            {{#each contact.links}}<span>{{this}}</span>{{#unless @last}} ï¿½ {{/unless}}{{/each}}
             {{/if}}
         </p>
     </header>
@@ -21,12 +21,12 @@
         <aside>
             {{#if summary}}<section><h3>Summary</h3><p>{{summary}}</p></section>{{/if}}
             {{#if skills.length}}<section><h3>Skills</h3><ul class="tight">{{#each skills}}<li>{{this}}</li>{{/each}}</ul></section>{{/if}}
-            {{#if certs.length}}<section><h3>Certifications</h3><ul class="tight">{{#each certs}}<li>{{name}} — {{issuer}} ({{year}})</li>{{/each}}</ul></section>{{/if}}
+            {{#if certs.length}}<section><h3>Certifications</h3><ul class="tight">{{#each certs}}<li>{{name}} ï¿½ {{issuer}} ({{year}})</li>{{/each}}</ul></section>{{/if}}
             {{#if education.length}}<section>
                 <h3>Education</h3>
                 {{#each education}}
                 <div class="item">
-                    <strong>{{degree}}</strong><br />{{school}}<br /><span class="date">{{start}} – {{end}}</span>
+                    <strong>{{degree}}</strong><br />{{school}}<br /><span class="date">{{start}} ï¿½ {{end}}</span>
                 </div>
                 {{/each}}
             </section>{{/if}}
@@ -36,8 +36,8 @@
             {{#each experience}}
             <div class="item">
                 <div class="row">
-                    <strong>{{role}}</strong> — {{company}}
-                    <span class="date">{{start}} – {{end}}</span>
+                    <strong>{{role}}</strong> ï¿½ {{company}}
+                    <span class="date">{{start}} ï¿½ {{end}}</span>
                 </div>
                 {{#if bullets.length}}<ul>{{#each bullets}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
             </div>
@@ -47,7 +47,7 @@
             {{#each projects}}
             <div class="item">
                 <div class="row">
-                    <strong>{{name}}</strong>{{#if link}} — <span>{{link}}</span>{{/if}}
+                    <strong>{{name}}</strong>{{#if link}} ï¿½ <span>{{link}}</span>{{/if}}
                 </div>
                 {{#if bullets.length}}<ul>{{#each bullets}}<li>{{this}}</li>{{/each}}</ul>{{/if}}
             </div>
