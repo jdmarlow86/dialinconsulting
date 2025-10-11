@@ -2,92 +2,119 @@
 <html lang="en" class="dark">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Dial in Consulting</title>
     <meta name="description" content="Dial in Consulting -> appointments, invoices, and idea incubator." />
+    <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="assets/favicon.svg" />
     <!-- Tailwind CDN (no build step) -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-    // Tailwind dark config
-    tailwind.config = { darkMode: 'class' };
-    </script>
+    <script>tailwind.config = { darkMode: 'class' };</script>
     <style>
-        /* Subtle glassy cards */
         .glass {
             background: rgba(30,30,30,.6);
             backdrop-filter: blur(8px);
         }
-        /* Simple focus ring */
+
         :focus-visible {
             outline: 2px solid #60a5fa;
             outline-offset: 2px;
+        }
+        /* mobile menu show/hide */
+        .mm-enter {
+            transform: scaleY(.98);
+            opacity: 0;
+        }
+
+        .mm-enter-active {
+            transform: scaleY(1);
+            opacity: 1;
+            transition: transform .12s ease-out, opacity .12s ease-out;
+        }
+
+        .mm-leave {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+
+        .mm-leave-active {
+            transform: scaleY(.98);
+            opacity: 0;
+            transition: transform .12s ease-in, opacity .12s ease-in;
         }
     </style>
 </head>
 <body class="bg-neutral-950 text-neutral-100 min-h-screen selection:bg-neutral-800">
     <!-- Header -->
-    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur">
-        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+    <header class="sticky top-0 z-40 border-b border-neutral-800/70 bg-neutral-950/80 backdrop-blur supports-[backdrop-filter]:backdrop-blur">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
+            <button id="mobileMenuBtn" class="md:hidden -ml-1 p-2 rounded-lg hover:bg-neutral-800/70" aria-label="Open menu" aria-expanded="false">
+                <!-- Hamburger -->
+                <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+            </button>
+
             <div class="flex items-center gap-3">
                 <img src="assets/favicon.svg" alt="" class="w-8 h-8">
                 <div>
-                    <h1 class="text-xl font-semibold tracking-tight">Dial in Consulting</h1>
-                    <p class="text-xs text-neutral-400">Your business goals</p>
+                    <h1 class="text-lg md:text-xl font-semibold tracking-tight">Dial in Consulting</h1>
+                    <p class="text-[11px] md:text-xs text-neutral-400">Your business goals</p>
                 </div>
             </div>
-            <nav class="flex gap-2">
+
+            <!-- Desktop nav -->
+            <nav class="hidden md:flex gap-1 lg:gap-2">
                 <button data-tab="home" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Home</button>
                 <button data-tab="appointments" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Appointments</button>
                 <button data-tab="invoices" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Invoices</button>
                 <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button>
                 <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spotlight</button>
-                <button data-tab="phase" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Phase Management</button>
-                <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe (Free)</button>
+                <button data-tab="phase" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Phase</button>
+                <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe</button>
             </nav>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobileMenu"
+             class="md:hidden origin-top scale-y-0 mm-enter glass border-t border-neutral-800 px-3 pb-[max(12px,env(safe-area-inset-bottom))]">
+            <div class="grid grid-cols-2 gap-2 pt-2">
+                <button data-tab="home" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Home</button>
+                <button data-tab="appointments" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Appointments</button>
+                <button data-tab="invoices" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Invoices</button>
+                <button data-tab="ideas" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Idea Incubator</button>
+                <button data-tab="spotlight" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Spotlight</button>
+                <button data-tab="phase" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Phase</button>
+                <button data-tab="subscribe" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left col-span-2">Subscribe</button>
+            </div>
         </div>
     </header>
 
-
     <!-- Main -->
-    <main class="max-w-6xl mx-auto px-4 py-8 space-y-8">
+    <main class="max-w-6xl mx-auto px-3 sm:px-4 py-6 sm:py-8 space-y-6 sm:space-y-8">
         <!-- Contact card -->
-        <section class="glass rounded-2xl p-6 border border-neutral-800">
+        <section class="glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-
-                <!-- Left side: Profile picture + contact info -->
-                <div class="flex items-center gap-4">
-                    <!-- Profile Picture -->
-                    <img src="assets/me-profile.jpeg"
-                         alt="Profile Picture"
-                         class="w-16 h-16 rounded-full border border-neutral-700 shadow-md">
-
-                    <!-- Contact Info -->
+                <!-- Left: Profile -->
+                <div class="flex items-center gap-3 sm:gap-4">
+                    <img src="assets/me-profile.jpeg" alt="Profile Picture" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-neutral-700 shadow-md">
                     <div>
-                        <h2 class="text-lg font-medium">Contact</h2>
+                        <h2 class="text-base sm:text-lg font-medium">Contact</h2>
                         <p class="text-neutral-300">Jonathan Marlow</p>
-                        <p class="text-neutral-400">
+                        <p class="text-neutral-400 text-sm">
                             <a class="hover:underline" href="tel:14239121038">423-912-1038</a> &middot;
                             <a class="hover:underline" href="mailto:jonmarlow@gmail.com">jonmarlow@gmail.com</a>
                         </p>
                     </div>
                 </div>
 
-                <!-- Right side: Buttons -->
-                <div class="flex gap-2">
-                    <a href="mailto:jonmarlow@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
-                        Email
-                    </a>
-                    <a href="#appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
-                        Schedule
-                    </a>
+                <!-- Right: Buttons -->
+                <div class="flex flex-wrap gap-2">
+                    <a href="mailto:jonmarlow@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Email</a>
+                    <a href="#appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Schedule</a>
 
-                    <!-- Socials trigger (menu will be portaled to <body>) -->
+                    <!-- Socials -->
                     <button id="socialsBtn"
                             class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700"
-                            aria-haspopup="menu"
-                            aria-expanded="false"
-                            aria-controls="socialsMenu">
+                            aria-haspopup="menu" aria-expanded="false" aria-controls="socialsMenu">
                         Socials ▾
                     </button>
 
@@ -95,19 +122,20 @@
                         Support
                     </button>
                 </div>
-
             </div>
         </section>
 
         <!-- Tabs -->
         <section class="grid gap-6">
             <!-- Home -->
-            <div id="tab-home" class="tab-pane glass rounded-2xl p-6 border border-neutral-800">
-                <h2 class="text-xl font-semibold mb-2">Welcome</h2>
+            <div id="tab-home" class="tab-pane glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <h2 class="text-lg sm:text-xl font-semibold mb-2">Welcome</h2>
                 <p class="text-neutral-300 mb-4">
                     Book time, check invoices, incubate ideas, and join the free list. All on a single, private page.
                 </p>
-                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+                <!-- Quick tiles -->
+                <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                     <a data-tab-jump="appointments" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Appointments</h3>
                         <p class="text-sm text-neutral-400">Pick a time that works.</p>
@@ -124,27 +152,23 @@
                         <h3 class="font-medium mb-1">Spotlight</h3>
                         <p class="text-sm text-neutral-400">Weekly star look!</p>
                     </a>
-                    <a data-tab-jump="subscribe" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                    <a data-tab-jump="subscribe" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800 col-span-1 xs:col-span-2 lg:col-span-1">
                         <h3 class="font-medium mb-1">Subscribe (Free)</h3>
                         <p class="text-sm text-neutral-400">Updates & resources.</p>
                     </a>
                 </div>
 
-
                 <!-- Resources -->
-                <div class="mt-6 glass rounded-2xl p-6 border border-neutral-800">
+                <div class="mt-6 glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                     <div class="flex items-center justify-between gap-4">
-                        <h2 class="text-xl font-semibold">Resources</h2>
-                        <!-- optional quick search/filter (client-side only) -->
-                        <input id="resFilter" placeholder="Filter resources..."
-                               class="w-56 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm" />
+                        <h2 class="text-lg sm:text-xl font-semibold">Resources</h2>
+                        <input id="resFilter" placeholder="Filter resources…" class="hidden sm:block w-56 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm" />
                     </div>
                     <p class="text-neutral-300 mt-1 mb-4">
                         Curated links for fast-moving startups: AI/LLMs, formation, docs, payments, analytics, and more.
                     </p>
 
-                    <div id="resourcesGrid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-
+                    <div id="resourcesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
                         <!-- LLMs & AI -->
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">LLMs & AI</h3>
@@ -210,22 +234,20 @@
                                 <li><a class="hover:underline" target="_blank" rel="noopener" href="https://sentry.io/">Sentry (Error Monitoring)</a></li>
                             </ul>
                         </div>
-
                     </div>
                 </div>
-
             </div>
 
             <!-- Appointments -->
-            <div id="tab-appointments" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
-                <h2 class="text-xl font-semibold mb-2">Appointment Setting</h2>
+            <div id="tab-appointments" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <h2 class="text-lg sm:text-xl font-semibold mb-2">Appointment Setting</h2>
                 <p class="text-neutral-300 mb-4">Choose a slot via your preferred scheduler.</p>
                 <div class="flex flex-col gap-4">
-                    <a id="bookNow" target="_blank" class="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white w-fit">Book Now</a>
-                    <details open class="bg-neutral-900/60 rounded-xl border border-neutral-800 p-4">
+                    <a id="bookNow" target="_blank" class="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white w-full sm:w-fit text-center">Book Now</a>
+                    <details class="bg-neutral-900/60 rounded-xl border border-neutral-800 p-4">
                         <summary class="cursor-pointer text-neutral-200">Embed (optional)</summary>
                         <div class="mt-4">
-                            <iframe id="schedulerFrame" class="w-full h-[640px] rounded-lg border border-neutral-800"
+                            <iframe id="schedulerFrame" class="w-full aspect-[3/4] sm:aspect-[16/9] rounded-lg border border-neutral-800"
                                     src="" loading="lazy" referrerpolicy="no-referrer"></iframe>
                         </div>
                     </details>
@@ -233,9 +255,8 @@
             </div>
 
             <!-- Invoices -->
-            <div id="tab-invoices" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
-                
-                <h2 class="text-xl font-semibold mb-2">View Invoice</h2>
+            <div id="tab-invoices" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <h2 class="text-lg sm:text-xl font-semibold mb-2">View Invoice</h2>
                 <p class="text-neutral-300 mb-4">Enter your Invoice ID (e.g., <code class="text-xs">INV-1001</code>).</p>
                 <form id="invoiceForm" class="flex flex-col sm:flex-row gap-3">
                     <input id="invoiceId" type="text" required placeholder="Invoice ID"
@@ -243,13 +264,13 @@
                     <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">View</button>
                 </form>
                 <div id="invoiceResult" class="mt-4"></div>
-                <p class="text-xs text-neutral-500 mt-6">Questions?  Email or book time &#9757;&#65039;</p>
+                <p class="text-xs text-neutral-500 mt-6">Questions? Email or book time &#9757;&#65039;</p>
             </div>
 
             <!-- Idea Incubator -->
-            <div id="tab-ideas" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
-                <h2 class="text-xl font-semibold mb-2">Idea Incubator</h2>
-                <form id="ideaForm" class="grid sm:grid-cols-2 gap-3">
+            <div id="tab-ideas" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <h2 class="text-lg sm:text-xl font-semibold mb-2">Idea Incubator</h2>
+                <form id="ideaForm" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     <input id="ideaTitle" required placeholder="Title" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
                     <select id="ideaPriority" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">
                         <option>Low</option>
@@ -258,7 +279,7 @@
                     </select>
                     <input id="ideaTags" placeholder="Tags (comma-sep)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
                     <textarea id="ideaNotes" rows="3" placeholder="Notes" class="sm:col-span-2 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800"></textarea>
-                    <div class="sm:col-span-2 flex gap-2">
+                    <div class="sm:col-span-2 flex flex-wrap gap-2">
                         <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" id="addIdeaBtn" type="submit">Add</button>
                         <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" type="button" id="exportIdeasBtn">Export JSON</button>
                         <label class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 cursor-pointer">
@@ -271,27 +292,26 @@
             </div>
 
             <!-- Spotlight -->
-            <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
-                <h2 class="text-xl font-semibold mb-2">Spotlight</h2>
+            <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <h2 class="text-lg sm:text-xl font-semibold mb-2">Spotlight</h2>
                 <p class="text-neutral-300 mb-4">
                     Each week we highlight one of our subscribers. Check them out!
                 </p>
                 <div class="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 flex flex-col sm:flex-row gap-6">
                     <img src="https://via.placeholder.com/120" alt="Spotlight photo"
-                         class="w-28 h-28 rounded-full border border-neutral-700 object-cover" />
+                         class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border border-neutral-700 object-cover" />
                     <div>
-                        <h3 class="text-lg font-medium">Alex Johnson</h3>
-                        <p class="text-neutral-400">alex.johnson@example.com</p>
-                        <p class="text-neutral-400">Specialty: Small Business Strategy</p>
-                        <p class="text-sm text-neutral-500 mt-2">
+                        <h3 class="text-base sm:text-lg font-medium">Alex Johnson</h3>
+                        <p class="text-neutral-400 text-sm sm:text-base">alex.johnson@example.com</p>
+                        <p class="text-neutral-400 text-sm sm:text-base">Specialty: Small Business Strategy</p>
+                        <p class="text-xs sm:text-sm text-neutral-500 mt-2">
                             "Dial in Consulting has helped me refine my business goals and find a clearer path forward."
                         </p>
                     </div>
                 </div>
+
                 <!-- Spotlight — Contact + Comments -->
                 <div id="spotlightComments" class="mt-6">
-
-                    <!-- Spotlight contact header -->
                     <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60 flex flex-col gap-1">
                         <div class="text-sm text-neutral-400">Spotlight Contact</div>
                         <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
@@ -302,52 +322,37 @@
                         </div>
                     </div>
 
-                    <!-- Owner tools (hidden by default; toggle with Ctrl+Shift+O) -->
                     <div id="spotlightOwnerTools" class="hidden mt-3 rounded-xl border border-amber-900 bg-amber-950/40 p-3">
                         <div class="flex flex-wrap items-center gap-2">
-                            <button id="spLogBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-sm">
-                                Log Spotlight (console + history)
-                            </button>
-                            <button id="spClearBtn" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm">
-                                Clear Spotlight (local)
-                            </button>
+                            <button id="spLogBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-sm">Log Spotlight (console + history)</button>
+                            <button id="spClearBtn" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm">Clear Spotlight (local)</button>
                             <span class="text-xs text-amber-300 ml-auto">Owner tools • toggle with Ctrl+Shift+O</span>
                         </div>
                         <p id="spOwnerMsg" class="text-xs text-neutral-300 mt-2 hidden"></p>
                     </div>
 
-                    <!-- Comments list -->
                     <div id="commentsList" class="mt-4 grid gap-3"></div>
 
-                    <!-- New comment form -->
                     <form id="commentForm" class="mt-4 grid gap-3">
-                        <div class="grid sm:grid-cols-2 gap-3">
-                            <input id="cmtAuthor" placeholder="Your name"
-                                   class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required />
-                            <input id="cmtEmail" type="email" placeholder="Your email (optional)"
-                                   class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <input id="cmtAuthor" placeholder="Your name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required />
+                            <input id="cmtEmail" type="email" placeholder="Your email (optional)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
                         </div>
-                        <textarea id="cmtText" rows="3" placeholder="Write a comment…"
-                                  class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required></textarea>
-
+                        <textarea id="cmtText" rows="3" placeholder="Write a comment…" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required></textarea>
                         <input type="hidden" id="cmtParentId" value="" />
-                        <div class="flex items-center gap-3">
+                        <div class="flex flex-wrap items-center gap-3">
                             <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Post Comment</button>
-                            <button id="cmtCancelReply" type="button"
-                                    class="hidden text-sm px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">
-                                Cancel Reply
-                            </button>
+                            <button id="cmtCancelReply" type="button" class="hidden text-sm px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">Cancel Reply</button>
                             <span id="cmtReplyInfo" class="hidden text-sm text-neutral-400"></span>
                         </div>
                     </form>
                 </div>
-
             </div>
 
-            <!-- Phase (5-stage manager) -->
-            <div id="tab-phase" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+            <!-- Phase -->
+            <div id="tab-phase" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                 <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <h2 class="text-xl font-semibold">Phase Manager</h2>
+                    <h2 class="text-lg sm:text-xl font-semibold">Phase Manager</h2>
 
                     <div class="flex items-center gap-3">
                         <label class="text-sm opacity-80">Phase</label>
@@ -361,23 +366,11 @@
                     </div>
                 </div>
 
-                <!-- Phase navigator (below the dropdown) -->
-                <div class="mt-2 flex items-center gap-3">
-                    <button id="phasePrevBtn"
-                            class="px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed">
-                        ← Previous
-                    </button>
-
-                    <span id="phaseStepLabel" class="text-sm text-neutral-400">
-                        Step 1 of 5
-                    </span>
-
-                    <button id="phaseNextBtn"
-                            class="px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed">
-                        Next →
-                    </button>
+                <div class="mt-2 flex flex-wrap items-center gap-3">
+                    <button id="phasePrevBtn" class="px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed">← Previous</button>
+                    <span id="phaseStepLabel" class="text-sm text-neutral-400">Step 1 of 5</span>
+                    <button id="phaseNextBtn" class="px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800 disabled:opacity-40 disabled:cursor-not-allowed">Next →</button>
                 </div>
-
 
                 <div class="mt-4 flex flex-wrap items-center gap-4">
                     <label class="inline-flex items-center gap-2 cursor-pointer select-none">
@@ -385,33 +378,28 @@
                         <span class="text-sm">MVP?</span>
                     </label>
 
-                    <button id="phaseClearBtn" class="text-xs px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800">
-                        Clear This Phase
-                    </button>
+                    <button id="phaseClearBtn" class="text-xs px-3 py-1.5 rounded-lg border border-neutral-700 hover:bg-neutral-800">Clear This Phase</button>
 
-                    <button id="phasePdfBtn"
-                            class="hidden sm:ml-auto text-sm px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow"
+                    <button id="phasePdfBtn" class="hidden sm:ml-auto text-sm px-4 py-2 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white shadow"
                             title="Generate a PDF including all phases">
                         Finalize Draft (PDF)
                     </button>
                 </div>
 
-                <!-- Dynamic fields + resources render here -->
                 <div id="phaseFields" class="mt-6 grid gap-4"></div>
                 <div id="phaseResources" class="mt-4"></div>
             </div>
 
-
             <!-- Subscribe (Free) -->
-            <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
-                <h2 class="text-xl font-semibold mb-2">Free Subscription</h2>
+            <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <h2 class="text-lg sm:text-xl font-semibold mb-2">Free Subscription</h2>
                 <p class="text-neutral-300 mb-4">Get updates & resources. Your info stays private.</p>
-                <form id="subForm" class="grid sm:grid-cols-3 gap-3">
+                <form id="subForm" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
                     <input id="subName" placeholder="Name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
                     <input id="subEmail" type="email" required placeholder="Email" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
                     <button class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">Join</button>
                 </form>
-                <div class="mt-4 flex gap-2">
+                <div class="mt-4 flex flex-wrap gap-2">
                     <button id="exportSubsBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Export CSV</button>
                     <button id="clearSubsBtn" class="px-3 py-2 rounded-lg bg-neutral-900 border border-red-900 text-red-300 hover:bg-neutral-900/60">Clear</button>
                 </div>
@@ -423,8 +411,7 @@
         </section>
 
         <!-- Support overlay -->
-        <div id="supportCard"
-             class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
+        <div id="supportCard" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-3">
             <div class="glass rounded-2xl p-6 border border-neutral-800 max-w-sm w-full text-center">
                 <h2 class="text-xl font-semibold mb-2 text-amber-300">Thank you for your support!</h2>
                 <p class="text-neutral-300 mb-4">Choose a platform below:</p>
@@ -434,35 +421,28 @@
                        class="block px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-center">
                         PayPal
                     </a>
-
                     <a href="https://cash.app/$jdmarlow" target="_blank" rel="noopener"
                        data-support-link data-tab-jump="home"
                        class="block px-4 py-2 rounded-lg bg-green-500 hover:bg-green-400 text-white text-center">
                         CashApp
                     </a>
-
                     <a href="https://venmo.com/u/Jonathan-Marlow-19" target="_blank" rel="noopener"
                        data-support-link data-tab-jump="home"
                        class="block px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-center">
                         Venmo
                     </a>
-
                 </div>
-                <button id="supportClose"
-                        class="mt-4 text-sm text-neutral-400 hover:underline">
-                    Close
-                </button>
+                <button id="supportClose" class="mt-4 text-sm text-neutral-400 hover:underline">Close</button>
             </div>
         </div>
 
-
         <footer class="text-center text-xs text-neutral-500 py-8">
-            <span id="year"></span> Dial in Consulting,  All rights reserved.
+            <span id="year"></span> Dial in Consulting, All rights reserved.
         </footer>
     </main>
 
+    <!-- Resources filter -->
     <script>
-        // ======= Resources filter (optional) =======
         const resFilter = document.getElementById('resFilter');
         const resourcesGrid = document.getElementById('resourcesGrid');
         resFilter?.addEventListener('input', () => {
@@ -473,44 +453,38 @@
             });
         });
     </script>
+
+    <!-- Socials dropdown (portaled to <body>) -->
     <script>
         (function () {
             const btn = document.getElementById("socialsBtn");
+            if (!btn) return;
 
-            // Create the menu once and append to <body> (prevents clipping)
             const menu = document.createElement("div");
             menu.id = "socialsMenu";
             menu.role = "menu";
             menu.tabIndex = -1;
             menu.className = [
-                "fixed", "z-50",
-                "w-44", "bg-neutral-900", "border", "border-neutral-700", "rounded-lg", "shadow-xl",
-                "outline-none",
-                // hidden/animation base
-                "opacity-0", "scale-95", "pointer-events-none",
-                "transition", "duration-150", "ease-out", "transform", "origin-top-right"
+                "fixed", "z-50", "w-48", "bg-neutral-900", "border", "border-neutral-700", "rounded-lg", "shadow-xl", "outline-none",
+                "opacity-0", "scale-95", "pointer-events-none", "transition", "duration-150", "ease-out", "transform", "origin-top-right"
             ].join(" ");
             menu.innerHTML = `
-          <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem"
-             class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
-          <a href="#" role="menuitem"
-             class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
-          <a href="https://bsky.app/profile/drthbane.bsky.social" target="_blank" role="menuitem"
-             class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
-        `;
+            <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
+            <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
+            <a href="https://bsky.app/profile/drthbane.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
+          `;
             document.body.appendChild(menu);
 
             let open = false;
-
             function placeMenu() {
                 const r = btn.getBoundingClientRect();
-                // position top-right of button; small gap
-                const top = r.bottom + 8; // px
-                const left = r.right - menu.offsetWidth; // align right edges
+                const top = r.bottom + 8;
+                const width = menu.offsetWidth || 192;
+                let left = r.right - width;
+                left = Math.max(8, Math.min(left, (window.innerWidth - width - 8)));
                 menu.style.top = `${top}px`;
-                menu.style.left = `${Math.max(8, left)}px`; // keep a tiny margin from viewport edge
+                menu.style.left = `${left}px`;
             }
-
             function openMenu() {
                 placeMenu();
                 menu.classList.remove("pointer-events-none", "opacity-0", "scale-95");
@@ -518,46 +492,61 @@
                 btn.setAttribute("aria-expanded", "true");
                 open = true;
             }
-
             function closeMenu() {
                 menu.classList.add("pointer-events-none", "opacity-0", "scale-95");
                 menu.classList.remove("opacity-100", "scale-100");
                 btn.setAttribute("aria-expanded", "false");
                 open = false;
             }
-
-            // Toggle on click
-            btn.addEventListener("click", (e) => {
-                e.stopPropagation();
-                if (open) {
-                    closeMenu();
-                } else {
-                    openMenu();
-                }
-            });
-
-            // Reposition on resize/scroll (in case page moves)
+            btn.addEventListener("click", (e) => { e.stopPropagation(); open ? closeMenu() : openMenu(); });
             window.addEventListener("resize", () => open && placeMenu());
             window.addEventListener("scroll", () => open && placeMenu(), true);
+            document.addEventListener("click", (e) => { if (!open) return; if (e.target === btn || menu.contains(e.target)) return; closeMenu(); });
+            document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) closeMenu(); });
+            menu.addEventListener("keydown", (e) => { if (e.key === "Tab") closeMenu(); });
+        })();
+    </script>
 
-            // Close on outside click
-            document.addEventListener("click", (e) => {
-                if (!open) return;
-                if (e.target === btn || menu.contains(e.target)) return;
-                closeMenu();
-            });
+    <!-- Mobile menu toggle -->
+    <script>
+        (function () {
+            const btn = document.getElementById('mobileMenuBtn');
+            const panel = document.getElementById('mobileMenu');
+            if (!btn || !panel) return;
 
-            // Close on Escape
-            document.addEventListener("keydown", (e) => {
-                if (e.key === "Escape" && open) closeMenu();
-            });
-
-            // Accessibility: focus trap-ish (basic)
-            menu.addEventListener("keydown", (e) => {
-                if (e.key === "Tab") closeMenu();
+            let open = false;
+            function show() {
+                panel.classList.remove('mm-enter', 'mm-leave-active');
+                panel.classList.add('mm-enter-active');
+                panel.style.transformOrigin = 'top';
+                panel.style.transform = 'scaleY(1)';
+                btn.setAttribute('aria-expanded', 'true');
+                open = true;
+            }
+            function hide() {
+                panel.classList.remove('mm-enter-active');
+                panel.classList.add('mm-leave', 'mm-leave-active');
+                // End state after animation
+                setTimeout(() => {
+                    panel.classList.remove('mm-leave', 'mm-leave-active');
+                    panel.classList.add('mm-enter');
+                    panel.style.transform = 'scaleY(0)';
+                }, 120);
+                btn.setAttribute('aria-expanded', 'false');
+                open = false;
+            }
+            // Initialize collapsed
+            panel.style.transform = 'scaleY(0)';
+            btn.addEventListener('click', () => open ? hide() : show());
+            // Close when a nav item is clicked
+            panel.addEventListener('click', (e) => {
+                const t = e.target;
+                if (t && t.matches('[data-tab]')) hide();
             });
         })();
     </script>
+
+    <!-- jsPDF + your components -->
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
     <script src="components/main.js"></script>
     <script src="components/nav.js"></script>
