@@ -288,6 +288,38 @@ phaseSelect.addEventListener("change", () => {
   updateNavButtons();
 });
 
+// PhaseScreen.js
+const { jsPDF } = window.jspdf;
+
+async function ensureUnicodeFont(doc) {
+    if (doc.getFontList()?.Inter) { doc.setFont("Inter", "normal"); return; }
+    const res = await fetch("assets/fonts/Inter-Regular.ttf"); // same-origin served
+    const buf = await res.arrayBuffer();
+    // convert to base64 (chunked)
+    let binary = "", bytes = new Uint8Array(buf), step = 0x8000;
+    for (let i = 0; i < bytes.length; i += step) binary += String.fromCharCode.apply(null, bytes.subarray(i, i + step));
+    const b64 = btoa(binary);
+    doc.addFileToVFS("Inter-Regular.ttf", b64);
+    doc.addFont("Inter-Regular.ttf", "Inter", "normal");
+    doc.setFont("Inter", "normal");
+}
+
+function cleanText(s = "") { /* your sanitizer from earlier */ return s
+    .replace(/\u00A0/g, " ").replace(/[\u200B-\u200D\uFEFF]/g, "")
+    .replace(/[\u2018\u2019]/g, "'").replace(/[\u201C\u201D]/g, '"')
+    .replace(/[\u2013\u2014]/g, "-").replace(/\u2026/g, "...")
+    .normalize("NFKC");
+}
+
+document.getElementById("phasePdfBtn")?.addEventListener("click", async () => {
+    const doc = new jsPDF({ unit: "pt", compress: true });
+    await ensureUnicodeFont(doc);
+    doc.setFontSize(14);
+    doc.text(cleanText('Phase “Draft” — bullets • and — dashes…'), 48, 64);
+    doc.save("phase-draft.pdf");
+});
+
+
 // After your first renderPhase() call, also initialize nav state:
 updateNavButtons();
 
