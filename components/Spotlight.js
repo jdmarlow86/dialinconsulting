@@ -199,3 +199,123 @@ commentForm.addEventListener('submit', (e) => {
     cmtCancelReply.classList.add('hidden');
     renderComments();
 });
+
+
+/* ===== Spotlight Manager ===== */
+    const spotlightKey = "dic:spotlight";
+    const commentsKey = "dic:spotlightComments";
+
+    // --- DOM Refs ---
+    const spotlightDisplay = document.getElementById("spotlightDisplay");
+    const spotlightAdmin = document.getElementById("spotlightAdmin");
+    const spotlightPhoto = document.getElementById("spotlightPhoto");
+    const spotlightName = document.getElementById("spotlightName");
+    const spotlightEmail = document.getElementById("spotlightEmail");
+    const spotlightSpecialty = document.getElementById("spotlightSpecialty");
+    const spotlightQuote = document.getElementById("spotlightQuote");
+
+    const clearSpotlightBtn = document.getElementById("clearSpotlightBtn");
+    const addSpotlightForm = document.getElementById("addSpotlightForm");
+
+    const commentForm = document.getElementById("commentForm");
+    const commentName = document.getElementById("commentName");
+    const commentText = document.getElementById("commentText");
+    const commentsList = document.getElementById("commentsList");
+
+    // --- Storage helpers ---
+    function loadSpotlight() {
+  try { return JSON.parse(localStorage.getItem(spotlightKey) || "null"); } catch { return null; }
+}
+    function saveSpotlight(data) {
+        localStorage.setItem(spotlightKey, JSON.stringify(data));
+}
+    function loadComments() {
+  try { return JSON.parse(localStorage.getItem(commentsKey) || "[]"); } catch { return []; }
+}
+    function saveComments(list) {
+        localStorage.setItem(commentsKey, JSON.stringify(list));
+}
+
+    // --- Rendering ---
+    function renderSpotlight() {
+  const s = loadSpotlight();
+    const comments = loadComments();
+
+    if (!s) {
+        spotlightDisplay.classList.add("hidden");
+    return;
+  }
+    spotlightDisplay.classList.remove("hidden");
+    spotlightPhoto.src = s.photo || "https://via.placeholder.com/120";
+    spotlightName.textContent = s.name;
+    spotlightEmail.textContent = s.email;
+    spotlightSpecialty.textContent = s.specialty || "";
+    spotlightQuote.textContent = s.quote || "";
+
+    renderComments(comments);
+}
+
+    function renderComments(comments) {
+  if (!comments.length) {
+        commentsList.innerHTML = `<p class="text-neutral-400">No comments yet.</p>`;
+    return;
+  }
+  commentsList.innerHTML = comments.map(c => `
+    <div class="p-3 rounded-lg border border-neutral-800 bg-neutral-900/60">
+        <p class="text-neutral-300 whitespace-pre-wrap">${c.text}</p>
+        <p class="text-xs text-neutral-500 mt-1">— ${c.name || "Anonymous"}, ${new Date(c.ts).toLocaleString()}</p>
+    </div>
+    `).join("");
+}
+
+// --- Comments ---
+commentForm.addEventListener("submit", e => {
+        e.preventDefault();
+    const text = commentText.value.trim();
+    if (!text) return;
+    const name = commentName.value.trim() || "Anonymous";
+    const comments = loadComments();
+    comments.push({name, text, ts: Date.now() });
+    saveComments(comments);
+    renderComments(comments);
+    commentForm.reset();
+});
+
+// --- Clear spotlight & comments ---
+clearSpotlightBtn.addEventListener("click", () => {
+  if (confirm("Clear the current spotlight and all comments?")) {
+        localStorage.removeItem(spotlightKey);
+    localStorage.removeItem(commentsKey);
+    renderSpotlight();
+    alert("Spotlight and comments cleared.");
+  }
+});
+
+// --- Add new spotlight ---
+addSpotlightForm.addEventListener("submit", e => {
+        e.preventDefault();
+    const data = {
+        name: sName.value.trim(),
+    email: sEmail.value.trim(),
+    specialty: sSpecialty.value.trim(),
+    photo: sPhoto.value.trim(),
+    quote: sQuote.value.trim(),
+    created: Date.now(),
+  };
+    saveSpotlight(data);
+    addSpotlightForm.reset();
+    renderSpotlight();
+    alert("New spotlight added!");
+});
+
+    // --- Access control (admin-only visibility) ---
+    const ADMIN_EMAIL = "jonmarlow@gmail.com"; // ? your email here
+    const userEmail = localStorage.getItem("dic:adminEmail"); // optional future auth
+    if (!ADMIN_EMAIL || ADMIN_EMAIL === "jonmarlow@gmail.com") {
+        // always show for you (customize if needed)
+        spotlightAdmin.classList.remove("hidden");
+}
+
+    // --- Init ---
+    renderSpotlight();
+

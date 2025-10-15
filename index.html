@@ -301,62 +301,59 @@
             </div>
 
             <!-- Spotlight -->
-            <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
-                <h2 class="text-lg sm:text-xl font-semibold mb-2">Spotlight</h2>
+            <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
+                <h2 class="text-xl font-semibold mb-2">Spotlight</h2>
                 <p class="text-neutral-300 mb-4">
-                    Each week we highlight one of our subscribers. Check them out!
+                    Each week we highlight one of our subscribers. Below is the current spotlight.
                 </p>
-                <div class="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 flex flex-col sm:flex-row gap-6">
-                    <img src="https://via.placeholder.com/120" alt="Spotlight photo"
-                         class="w-24 h-24 sm:w-28 sm:h-28 rounded-full border border-neutral-700 object-cover" />
-                    <div>
-                        <h3 class="text-base sm:text-lg font-medium">Alex Johnson</h3>
-                        <p class="text-neutral-400 text-sm sm:text-base">alex.johnson@example.com</p>
-                        <p class="text-neutral-400 text-sm sm:text-base">Specialty: Small Business Strategy</p>
-                        <p class="text-xs sm:text-sm text-neutral-500 mt-2">
-                            "Dial in Consulting has helped me refine my business goals and find a clearer path forward."
-                        </p>
+
+                <!-- Spotlight display -->
+                <div id="spotlightDisplay" class="rounded-xl border border-neutral-800 p-6 bg-neutral-900/60 mb-6 hidden">
+                    <div class="flex flex-col sm:flex-row gap-6">
+                        <img id="spotlightPhoto" src="" alt="Spotlight photo"
+                             class="w-28 h-28 rounded-full border border-neutral-700 object-cover" />
+                        <div>
+                            <h3 id="spotlightName" class="text-lg font-medium"></h3>
+                            <p id="spotlightEmail" class="text-neutral-400"></p>
+                            <p id="spotlightSpecialty" class="text-neutral-400"></p>
+                            <p id="spotlightQuote" class="text-sm text-neutral-500 mt-2"></p>
+                        </div>
+                    </div>
+
+                    <!-- Comment section -->
+                    <div class="mt-6">
+                        <h4 class="text-sm font-semibold mb-2">Comments</h4>
+                        <form id="commentForm" class="flex flex-col sm:flex-row gap-2 mb-3">
+                            <input id="commentName" placeholder="Your name"
+                                   class="flex-1 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm" />
+                            <input id="commentText" required placeholder="Write a comment"
+                                   class="flex-1 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm" />
+                            <button class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-sm">Add</button>
+                        </form>
+                        <div id="commentsList" class="grid gap-2 text-sm"></div>
                     </div>
                 </div>
 
-                <!-- Spotlight — Contact + Comments -->
-                <div id="spotlightComments" class="mt-6">
-                    <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60 flex flex-col gap-1">
-                        <div class="text-sm text-neutral-400">Spotlight Contact</div>
-                        <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
-                            <strong id="spName" class="text-neutral-100">—</strong>
-                            <a id="spEmail" href="#" class="text-neutral-300 hover:underline">—</a>
-                            <a id="spPhone" href="#" class="text-neutral-300 hover:underline">—</a>
-                            <span id="spSpecialty" class="text-neutral-400">—</span>
-                        </div>
+                <!-- Admin tools (visible only to you) -->
+                <div id="spotlightAdmin" class="hidden border-t border-neutral-800 pt-4 mt-4">
+                    <h3 class="text-lg font-medium mb-3">Spotlight Manager</h3>
+                    <div class="flex flex-wrap gap-2 mb-4">
+                        <button id="clearSpotlightBtn" class="px-4 py-2 rounded-lg bg-red-700 hover:bg-red-600 text-white">
+                            Clear Spotlight & Comments
+                        </button>
                     </div>
 
-                    <div id="spotlightOwnerTools" class="hidden mt-3 rounded-xl border border-amber-900 bg-amber-950/40 p-3">
-                        <div class="flex flex-wrap items-center gap-2">
-                            <button id="spLogBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-sm">Log Spotlight (console + history)</button>
-                            <button id="spClearBtn" class="px-3 py-2 rounded-lg bg-red-600 hover:bg-red-500 text-white text-sm">Clear Spotlight (local)</button>
-                            <span class="text-xs text-amber-300 ml-auto">Owner tools • toggle with Ctrl+Shift+O</span>
-                        </div>
-                        <p id="spOwnerMsg" class="text-xs text-neutral-300 mt-2 hidden"></p>
-                    </div>
-
-                    <div id="commentsList" class="mt-4 grid gap-3"></div>
-
-                    <form id="commentForm" class="mt-4 grid gap-3">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <input id="cmtAuthor" placeholder="Your name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required />
-                            <input id="cmtEmail" type="email" placeholder="Your email (optional)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
-                        </div>
-                        <textarea id="cmtText" rows="3" placeholder="Write a comment…" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" required></textarea>
-                        <input type="hidden" id="cmtParentId" value="" />
-                        <div class="flex flex-wrap items-center gap-3">
-                            <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Post Comment</button>
-                            <button id="cmtCancelReply" type="button" class="hidden text-sm px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">Cancel Reply</button>
-                            <span id="cmtReplyInfo" class="hidden text-sm text-neutral-400"></span>
-                        </div>
+                    <form id="addSpotlightForm" class="grid sm:grid-cols-2 gap-3">
+                        <input id="sName" required placeholder="Name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                        <input id="sEmail" required type="email" placeholder="Email" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                        <input id="sSpecialty" placeholder="Specialty" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                        <input id="sPhoto" placeholder="Photo URL (optional)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                        <textarea id="sQuote" placeholder="Short quote or testimonial" class="sm:col-span-2 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800"></textarea>
+                        <button class="sm:col-span-2 px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">Add Spotlight</button>
                     </form>
                 </div>
             </div>
+
 
             <!-- Phase -->
             <div id="tab-phase" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
