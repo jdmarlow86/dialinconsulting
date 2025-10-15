@@ -1,4 +1,4 @@
-<script>
+
 // Spotlight.js (safe version)
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -142,4 +142,4 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial render
     renderSpotlight();
 });
-</script>
+
