@@ -69,7 +69,9 @@
                 <button data-tab="ideas" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Idea Incubator</button>
                 <button data-tab="spotlight" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Spotlight</button>
                 <button data-tab="phase" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Phase</button>
+                <button data-tab="affiliates" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Affiliates</button>
                 <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe</button>
+
             </nav>
         </div>
 
@@ -83,6 +85,7 @@
                 <button data-tab="ideas" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Idea Incubator</button>
                 <button data-tab="spotlight" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Spotlight</button>
                 <button data-tab="phase" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Phase</button>
+                <button data-tab="affiliates" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Affiliates</button>
                 <button data-tab="subscribe" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left col-span-2">Subscribe</button>
             </div>
         </div>
@@ -396,6 +399,37 @@
                 <div id="phaseResources" class="mt-4"></div>
             </div>
 
+            <!-- Affiliates -->
+            <div id="tab-affiliates" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                    <div>
+                        <h2 class="text-lg sm:text-xl font-semibold">Affiliates</h2>
+                        <p class="text-neutral-300">Partners, local businesses, and friends of Dial-In Consulting.</p>
+                    </div>
+
+                    <!-- simple search -->
+                    <div class="flex items-center gap-2">
+                        <input id="affSearch" placeholder="Search affiliates…" class="w-56 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm" />
+                        <select id="affPageSize" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm">
+                            <option value="16">16 / page</option>
+                            <option value="8">8 / page</option>
+                            <option value="4">4 / page</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- grid -->
+                <div id="affGrid" class="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"></div>
+
+                <!-- pagination -->
+                <div class="mt-4 flex items-center justify-between">
+                    <button id="affPrev" class="px-3 py-2 rounded-lg border border-neutral-800 hover:bg-neutral-800/70 disabled:opacity-40 disabled:cursor-not-allowed">← Prev</button>
+                    <span id="affPageInfo" class="text-sm text-neutral-400"></span>
+                    <button id="affNext" class="px-3 py-2 rounded-lg border border-neutral-800 hover:bg-neutral-800/70 disabled:opacity-40 disabled:cursor-not-allowed">Next →</button>
+                </div>
+            </div>
+
+
             <!-- Subscribe (Free) -->
             <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                 <h2 class="text-lg sm:text-xl font-semibold mb-2">Free Subscription</h2>
@@ -497,11 +531,11 @@
                 "opacity-0", "scale-95", "pointer-events-none", "transition", "duration-150", "ease-out", "transform", "origin-top-right"
             ].join(" ");
             menu.innerHTML = `
-            <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
-            <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
-            <a href="https://bsky.app/profile/dialinconsulting.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
-            <a href="https://www.facebook.com/profile.php?id=61582532870440" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">Facebook</a> 
-          `;
+                <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
+                <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
+                <a href="https://bsky.app/profile/dialinconsulting.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
+                <a href="https://www.facebook.com/profile.php?id=61582532870440" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">Facebook</a>
+              `;
             document.body.appendChild(menu);
 
             let open = false;
@@ -581,6 +615,7 @@
     <script src="components/nav.js"></script>
     <script src="components/PhaseScreen.js"></script>
     <script src="components/Support.js"></script>
+    <script src="components/Affiliates.js"></script>
     <script src="components/Spotlight.js"></script>
 </body>
 </html>
