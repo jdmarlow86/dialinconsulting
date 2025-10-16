@@ -400,11 +400,33 @@
             <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                 <h2 class="text-lg sm:text-xl font-semibold mb-2">Free Subscription</h2>
                 <p class="text-neutral-300 mb-4">Get updates & resources. Your info stays private.</p>
-                <form id="subForm" class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                    <input id="subName" placeholder="Name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
-                    <input id="subEmail" type="email" required placeholder="Email" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <form id="subForm"
+                      class="grid grid-cols-1 sm:grid-cols-3 gap-3"
+                      action="https://formsubmit.co/YOUR_EMAIL@EXAMPLE.COM"
+                      method="POST">
+
+                    <!-- Visible fields -->
+                    <input id="subName" name="name" placeholder="Name"
+                           class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                    <input id="subEmail" name="email" type="email" required placeholder="Email"
+                           class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
                     <button class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white">Join</button>
+
+                    <!-- Hidden config -->
+                    <!-- CC a copy to your consulting inbox -->
+                    <input type="hidden" name="_cc" value="dial.in.consulting@gmail.com" />
+
+                    <!-- Subject you’ll see on your side -->
+                    <input type="hidden" name="_subject" value="New Dial-in Consulting subscriber" />
+
+                    <!-- Autoresponse (sent to the subscriber) -->
+                    <input type="hidden" name="_autoresponse"
+                           value="Thanks for subscribing to Dial-in Consulting! We’ve received your request and will share helpful resources soon. —Jonathan" />
+
+                    <!-- Redirect back to Subscribe tab after submit (update domain if needed) -->
+                    <input type="hidden" name="_next" value="https://YOURDOMAIN.com/#subscribe" />
                 </form>
+
                 <div class="mt-4 flex flex-wrap gap-2">
                     <button id="exportSubsBtn" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Export CSV</button>
                     <button id="clearSubsBtn" class="px-3 py-2 rounded-lg bg-neutral-900 border border-red-900 text-red-300 hover:bg-neutral-900/60">Clear</button>

@@ -141,7 +141,7 @@ renderIdeas();
 
 
 
-// ======= FREE SUBSCRIPTION (localStorage + optional Formspree) =======
+// ======= FREE SUBSCRIPTION (localStorage + FormSubmit) =======
 const subKey = 'dic:subs';
 const subForm = document.getElementById('subForm');
 const subName = document.getElementById('subName');
@@ -154,26 +154,27 @@ function loadSubs() { try { return JSON.parse(localStorage.getItem(subKey) || '[
 function saveSubs(items) { localStorage.setItem(subKey, JSON.stringify(items)); }
 function renderSubs() {
     const items = loadSubs();
-    subsList.innerHTML = items.length ? items.map(s => `<li>? ${s.name || '(no name)'} ? ${s.email}</li>`).join('') : '<li class="text-neutral-400">No subscribers yet.</li>';
+    subsList.innerHTML = items.length
+        ? items.map(s => `• ${s.name || '(no name)'} – ${s.email}`).join('<br/>')
+        : '<li class="text-neutral-400">No subscribers yet.</li>';
 }
-subForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+
+// Save locally, then allow normal form POST (no preventDefault)
+subForm.addEventListener('submit', () => {
     const entry = { name: subName.value.trim(), email: subEmail.value.trim(), ts: Date.now() };
-    const items = loadSubs(); items.unshift(entry); saveSubs(items); renderSubs();
-    // Optional: forward to Formspree
-    if (FORMSPREE_ENDPOINT) {
-        try {
-            await fetch(FORMSPREE_ENDPOINT, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(entry) });
-        } catch { }
-    }
-    subForm.reset();
-    alert('Thanks for subscribing!');
+    const items = loadSubs(); items.unshift(entry); saveSubs(items);
 });
+
 exportSubsBtn.addEventListener('click', () => {
-    const rows = [['Name', 'Email', 'Timestamp'], ...loadSubs().map(s => [s.name, s.email, new Date(s.ts).toISOString()])];
+    const rows = [['Name', 'Email', 'Timestamp'],
+    ...loadSubs().map(s => [s.name, s.email, new Date(s.ts).toISOString()])];
     const csv = rows.map(r => r.map(v => `"${String(v).replace(/"/g, '""')}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv' }); const a = document.createElement('a');
-    a.href = URL.createObjectURL(blob); a.download = 'subscribers.csv'; a.click();
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'subscribers.csv'; a.click();
 });
-clearSubsBtn.addEventListener('click', () => { if (confirm('Clear all subscribers?')) { localStorage.removeItem(subKey); renderSubs(); } });
+
+clearSubsBtn.addEventListener('click', () => {
+    if (confirm('Clear all subscribers?')) { localStorage.removeItem(subKey); renderSubs(); }
+});
+
 renderSubs();
