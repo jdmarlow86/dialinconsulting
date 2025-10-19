@@ -6,7 +6,7 @@ const AFFILIATES = [
     {
         name: "My Bible Belt",
         tagline: "Bible themed multitool",
-        site: "mybiblebelt.org",
+        site: "https://mybiblebelt.org",
         email: "dial.in.consulting@gmail.com",
         phone: "423-912-1038",
         image: "assets/mybiblebelt-icon.png",
