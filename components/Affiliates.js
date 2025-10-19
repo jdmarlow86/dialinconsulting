@@ -4,12 +4,12 @@
 
 const AFFILIATES = [
     {
-        name: "PawNamics",
-        tagline: "Pet-sitting marketplace and tools",
-        site: "https://example.com/pawnamics",
-        email: "hello@pawnamics.com",
-        phone: "555-123-4567",
-        image: "https://via.placeholder.com/300x180?text=PawNamics",
+        name: "My Bible Belt",
+        tagline: "Bible themed multitool",
+        site: "mybiblebelt.org",
+        email: "dial.in.consulting@gmail.com",
+        phone: "423-912-1038",
+        image: "assets/mybiblebelt-icon.png",
     },
     {
         name: "East Tennessee Hub",
