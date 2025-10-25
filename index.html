@@ -71,6 +71,7 @@
                 <button data-tab="phase" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Phase</button>
                 <button data-tab="affiliates" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Affiliates</button>
                 <button data-tab="subscribe" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Subscribe</button>
+                <button data-tab="docs" class="tab-btn px-3 py-2 rounded-lg hover:bg-neutral-800/70">Docs</button>
 
             </nav>
         </div>
@@ -87,6 +88,8 @@
                 <button data-tab="phase" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Phase</button>
                 <button data-tab="affiliates" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Affiliates</button>
                 <button data-tab="subscribe" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left col-span-2">Subscribe</button>
+                <button data-tab="docs" class="tab-btn w-full px-3 py-2 rounded-lg bg-neutral-900/60 hover:bg-neutral-800/70 text-left">Docs</button>
+
             </div>
         </div>
     </header>
@@ -497,6 +500,65 @@
                 <button id="supportClose" class="mt-4 text-sm text-neutral-400 hover:underline">Close</button>
             </div>
         </div>
+        <!-- Docs -->
+        <div id="tab-docs" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
+            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-2">
+                <div>
+                    <h2 class="text-lg sm:text-xl font-semibold">Docs</h2>
+                    <p class="text-neutral-300">Create consulting agreements, NDAs, and SOWs in minutes.</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <select id="docsTemplate" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800 text-sm">
+                        <option value="consulting">Consulting Agreement (Short-Form)</option>
+                        <option value="nda">Mutual NDA</option>
+                        <option value="sow">SOW Addendum</option>
+                    </select>
+                    <button id="docsClearDraft" class="px-3 py-2 rounded-lg bg-neutral-900 border border-red-900 text-red-300 hover:bg-neutral-900/60 text-sm">Clear Draft</button>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form id="docsForm" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <input id="orgName" placeholder="Your Company (Consultant)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="clientName" placeholder="Client Name" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="projectTitle" placeholder="Project / Engagement Title" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="rate" placeholder="Rate (e.g., $125/hr or $5,000 fixed)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="billingCycle" placeholder="Billing Cycle (e.g., Net 15)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="startDate" type="date" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="endDate" type="date" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="governingLaw" placeholder="Governing Law (e.g., Tennessee)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="noticeDays" placeholder="Termination Notice (days, e.g., 14)" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <select id="ipOwner" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800">
+                    <option value="client">IP Ownership: Client</option>
+                    <option value="consultant">IP Ownership: Consultant (license to Client)</option>
+                    <option value="workmade">Work Made for Hire (Client)</option>
+                </select>
+                <input id="contactEmail" type="email" placeholder="Primary Contact Email" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <input id="contactPhone" placeholder="Primary Contact Phone" class="px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
+                <textarea id="scope" rows="4" placeholder="Scope (deliverables, milestones, exclusions)" class="sm:col-span-2 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800"></textarea>
+                <textarea id="extras" rows="3" placeholder="Special terms (optional)" class="sm:col-span-2 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800"></textarea>
+
+                <div class="sm:col-span-2 flex flex-wrap gap-2 mt-1">
+                    <button id="docsPreview" class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" type="button">Preview</button>
+                    <button id="docsPdf" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white" type="button">Download PDF</button>
+                    <button id="docsMd" class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700" type="button">Download .md</button>
+                    <button id="docsReset" class="ml-auto px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-900/60" type="button">Reset</button>
+                </div>
+            </form>
+
+            <!-- Preview -->
+            <div class="mt-6 rounded-xl border border-neutral-800 bg-neutral-900/60 p-4">
+                <div class="flex items-center justify-between gap-3 mb-2">
+                    <h3 class="font-medium">Preview</h3>
+                    <span class="text-xs text-neutral-500">Non-legal guidance. Review with counsel.</span>
+                </div>
+                <pre id="docsPreviewBox" class="whitespace-pre-wrap text-sm text-neutral-200 min-h-[140px]"></pre>
+            </div>
+
+            <p class="text-xs text-neutral-500 mt-4">
+                This tool provides general templates and is not a substitute for legal advice. Consider having your counsel review before signing.
+            </p>
+        </div>
 
         <footer class="text-center text-xs text-neutral-500 py-8">
             <span id="year"></span> Dial in Consulting, All rights reserved.
@@ -531,11 +593,11 @@
                 "opacity-0", "scale-95", "pointer-events-none", "transition", "duration-150", "ease-out", "transform", "origin-top-right"
             ].join(" ");
             menu.innerHTML = `
-                <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
-                <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
-                <a href="https://bsky.app/profile/dialinconsulting.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
-                <a href="https://www.facebook.com/profile.php?id=61582532870440" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">Facebook</a>
-              `;
+                    <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
+                    <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
+                    <a href="https://bsky.app/profile/dialinconsulting.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
+                    <a href="https://www.facebook.com/profile.php?id=61582532870440" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">Facebook</a>
+                  `;
             document.body.appendChild(menu);
 
             let open = false;
@@ -617,5 +679,7 @@
     <script src="components/Support.js"></script>
     <script src="components/Affiliates.js"></script>
     <script src="components/Spotlight.js"></script>
+    <script src="components/Docs.js"></script>
+
 </body>
 </html>
