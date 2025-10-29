@@ -270,17 +270,28 @@
             </div>
 
             <!-- Invoices -->
-            <div id="tab-invoices" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
-                <h2 class="text-lg sm:text-xl font-semibold mb-2">View Invoice</h2>
-                <p class="text-neutral-300 mb-4">Enter your Invoice ID (e.g., <code class="text-xs">INV-1001</code>).</p>
-                <form id="invoiceForm" class="flex flex-col sm:flex-row gap-3">
-                    <input id="invoiceId" type="text" required placeholder="Invoice ID"
-                           class="w-full sm:w-64 px-3 py-2 rounded-lg bg-neutral-900 border border-neutral-800" />
-                    <button class="px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">View</button>
-                </form>
-                <div id="invoiceResult" class="mt-4"></div>
-                <p class="text-xs text-neutral-500 mt-6">Questions? Email or book time &#9757;&#65039;</p>
-            </div>
+            <section id="invoices" class="p-6 text-gray-200">
+                <h2 class="text-2xl font-semibold mb-4">Invoices</h2>
+
+                <!-- Invoice Data Form -->
+                <div class="grid gap-3 sm:grid-cols-2 mb-4">
+                    <input id="clientName" type="text" placeholder="Client Name" class="p-2 rounded bg-gray-800 w-full">
+                    <input id="invoiceNumber" type="text" placeholder="Invoice #" class="p-2 rounded bg-gray-800 w-full">
+                    <input id="serviceDesc" type="text" placeholder="Service Description" class="p-2 rounded bg-gray-800 w-full">
+                    <input id="invoiceDate" type="date" class="p-2 rounded bg-gray-800 w-full">
+                    <input id="amount" type="number" placeholder="Amount ($)" class="p-2 rounded bg-gray-800 w-full">
+                </div>
+
+                <button id="downloadInvoiceBtn"
+                        class="bg-indigo-600 hover:bg-indigo-500 text-white px-5 py-2 rounded-lg shadow">
+                    Download Invoice (PDF)
+                </button>
+            </section>
+
+            <!-- jsPDF Library -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+            <script src="invoices.js"></script>
+
 
             <!-- Idea Incubator -->
             <div id="tab-ideas" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
