@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Spotlight placeholder portrait</title>
+  <desc id="desc">Neutral circular avatar silhouette used as a placeholder.</desc>
+  <defs>
+    <linearGradient id="gradSpot" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+  </defs>
+  <rect width="240" height="240" fill="url(#gradSpot)" rx="32" ry="32" />
+  <circle cx="120" cy="96" r="44" fill="#374151" />
+  <path d="M120 140c-40 0-72 24-72 54h144c0-30-32-54-72-54z" fill="#4b5563" />
+</svg>
