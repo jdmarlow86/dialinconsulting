@@ -20,6 +20,7 @@
             outline: 2px solid #60a5fa;
             outline-offset: 2px;
         }
+
         /* mobile menu show/hide */
         .mm-enter {
             transform: scaleY(.98);
@@ -96,6 +97,7 @@
         <!-- Contact card -->
         <section class="glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <!-- Left: profile -->
                 <div class="flex items-center gap-3 sm:gap-4">
                     <img src="assets/me-profile.jpeg" alt="Profile Picture" class="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-neutral-700 shadow-md">
                     <div>
@@ -108,9 +110,14 @@
                     </div>
                 </div>
 
+                <!-- Right: buttons -->
                 <div class="flex flex-wrap gap-2">
                     <a href="mailto:dial.in.consulting@gmail.com" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Email</a>
-                    <a href="#appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">Schedule</a>
+
+                    <!-- updated to use tab jump -->
+                    <button data-tab-jump="appointments" class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700">
+                        Schedule
+                    </button>
 
                     <button id="socialsBtn"
                             class="px-3 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700"
@@ -127,6 +134,7 @@
 
         <!-- Tabs -->
         <section class="grid gap-6">
+
             <!-- Home -->
             <div id="tab-home" class="tab-pane glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                 <h2 class="text-lg sm:text-xl font-semibold mb-2">Welcome</h2>
@@ -136,29 +144,33 @@
 
                 <!-- Quick tiles -->
                 <div class="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                    <a data-tab-jump="appointments" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                    <button data-tab-jump="appointments" class="text-left block w-full p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Appointments</h3>
                         <p class="text-sm text-neutral-400">Pick a time that works.</p>
-                    </a>
-                    <a data-tab-jump="invoices" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                    </button>
+
+                    <button data-tab-jump="invoices" class="text-left block w-full p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Invoices</h3>
                         <p class="text-sm text-neutral-400">Securely view by ID.</p>
-                    </a>
-                    <a data-tab-jump="ideas" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                    </button>
+
+                    <button data-tab-jump="ideas" class="text-left block w-full p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Idea Incubator</h3>
                         <p class="text-sm text-neutral-400">Capture & refine quickly.</p>
-                    </a>
-                    <a data-tab-jump="spotlight" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
+                    </button>
+
+                    <button data-tab-jump="spotlight" class="text-left block w-full p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800">
                         <h3 class="font-medium mb-1">Spotlight</h3>
                         <p class="text-sm text-neutral-400">Weekly star look!</p>
-                    </a>
-                    <a data-tab-jump="subscribe" class="block p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800 col-span-1 xs:col-span-2 lg:col-span-1">
+                    </button>
+
+                    <button data-tab-jump="subscribe" class="text-left block w-full p-4 rounded-xl bg-neutral-900/60 hover:bg-neutral-800/70 border border-neutral-800 col-span-1 xs:col-span-2 lg:col-span-1">
                         <h3 class="font-medium mb-1">Subscribe (Free)</h3>
                         <p class="text-sm text-neutral-400">Updates & resources.</p>
-                    </a>
+                    </button>
                 </div>
 
-                <!-- Resources (unchanged) -->
+                <!-- Resources -->
                 <div class="mt-6 glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                     <div class="flex items-center justify-between gap-4">
                         <h2 class="text-lg sm:text-xl font-semibold">Resources</h2>
@@ -169,7 +181,6 @@
                     </p>
 
                     <div id="resourcesGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-                        <!-- ... same cards as before ... -->
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">LLMs & AI</h3>
                             <ul class="space-y-1 text-sm text-neutral-300">
@@ -179,6 +190,7 @@
                                 <li><a class="hover:underline" target="_blank" rel="noopener" href="https://huggingface.co">Hugging Face Hub</a></li>
                             </ul>
                         </div>
+
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">Startup Walkthroughs</h3>
                             <ul class="space-y-1 text-sm text-neutral-300">
@@ -188,6 +200,7 @@
                                 <li><a class="hover:underline" target="_blank" rel="noopener" href="https://www.sequoiacap.com/article/writing-a-business-plan/">Sequoia: Writing a Business Plan</a></li>
                             </ul>
                         </div>
+
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">Essential Docs & Legal</h3>
                             <ul class="space-y-1 text-sm text-neutral-300">
@@ -197,6 +210,7 @@
                                 <li><a class="hover:underline" target="_blank" rel="noopener" href="https://www.cpra.ca.gov/faq.html">Privacy (CCPA/CPRA FAQ)</a></li>
                             </ul>
                         </div>
+
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">Money: Payments & Finance</h3>
                             <ul class="space-y-1 text-sm text-neutral-300">
@@ -206,6 +220,7 @@
                                 <li><a class="hover:underline" target="_blank" rel="noopener" href="https://quickbooks.intuit.com/">QuickBooks</a></li>
                             </ul>
                         </div>
+
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">Marketing & Analytics</h3>
                             <ul class="space-y-1 text-sm text-neutral-300">
@@ -215,6 +230,7 @@
                                 <li><a class="hover:underline" target="_blank" rel="noopener" href="https://www.canva.com/">Canva</a></li>
                             </ul>
                         </div>
+
                         <div class="rounded-xl border border-neutral-800 p-4 bg-neutral-900/60">
                             <h3 class="font-medium mb-2">Dev & Design</h3>
                             <ul class="space-y-1 text-sm text-neutral-300">
@@ -234,6 +250,8 @@
                 <p class="text-neutral-300 mb-4">Choose a slot via your preferred scheduler.</p>
                 <div class="flex flex-col gap-4">
                     <a id="bookNow" target="_blank" class="px-4 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white w-full sm:w-fit text-center">Book Now</a>
+
+                    <!-- always-expanded embed -->
                     <div class="bg-neutral-900/60 rounded-xl border border-neutral-800 p-4">
                         <div class="flex items-center justify-between gap-3 mb-3">
                             <h3 class="font-medium">Embed</h3>
@@ -251,7 +269,7 @@
                 </div>
             </div>
 
-            <!-- Invoices (NEW: as a proper tab-pane, all IDs are namespaced to avoid collisions) -->
+            <!-- Invoices -->
             <div id="tab-invoices" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
                 <div class="flex items-end justify-between gap-4 flex-wrap mb-2">
                     <div>
@@ -306,41 +324,33 @@
 
             <!-- Spotlight -->
             <div id="tab-spotlight" class="tab-pane hidden glass rounded-2xl p-6 border border-neutral-800">
-                <!-- (unchanged content) -->
-                <!-- ... -->
+                <!-- spotlight content injected by Spotlight.js -->
             </div>
 
             <!-- Phase -->
             <div id="tab-phase" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
-                <!-- (unchanged content) -->
-                <!-- ... -->
+                <!-- phase screen content injected by PhaseScreen.js -->
             </div>
 
             <!-- Affiliates -->
             <div id="tab-affiliates" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
-                <!-- (unchanged content) -->
-                <!-- ... -->
+                <!-- affiliates grid injected by Affiliates.js -->
             </div>
 
             <!-- Subscribe -->
             <div id="tab-subscribe" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
-                <!-- (unchanged content) -->
-                <!-- ... -->
+                <!-- subscribe content injected by main.js / nav.js -->
             </div>
         </section>
 
         <!-- Support overlay -->
         <div id="supportCard" class="hidden fixed inset-0 z-50 bg-black/70 flex items-center justify-center p-3">
-            <!-- (unchanged content) -->
-            <!-- ... -->
+            <!-- support UI injected by Support.js -->
         </div>
 
         <!-- Docs -->
         <div id="tab-docs" class="tab-pane hidden glass rounded-2xl p-4 sm:p-6 border border-neutral-800">
-            <!-- (unchanged content) -->
-            <!-- Note: this section still uses an input with id="clientName".
-                 Our invoice form now uses invClientName to avoid ID collision. -->
-            <!-- ... -->
+            <!-- docs form / preview injected by Docs.js -->
         </div>
 
         <footer class="text-center text-xs text-neutral-500 py-8">
@@ -381,6 +391,7 @@
             document.body.appendChild(menu);
 
             let open = false;
+
             function placeMenu() {
                 const r = btn.getBoundingClientRect();
                 const top = r.bottom + 8;
@@ -390,6 +401,7 @@
                 menu.style.top = `${top}px`;
                 menu.style.left = `${left}px`;
             }
+
             function openMenu() {
                 placeMenu();
                 menu.classList.remove("pointer-events-none", "opacity-0", "scale-95");
@@ -397,18 +409,35 @@
                 btn.setAttribute("aria-expanded", "true");
                 open = true;
             }
+
             function closeMenu() {
                 menu.classList.add("pointer-events-none", "opacity-0", "scale-95");
                 menu.classList.remove("opacity-100", "scale-100");
                 btn.setAttribute("aria-expanded", "false");
                 open = false;
             }
-            btn.addEventListener("click", (e) => { e.stopPropagation(); open ? closeMenu() : openMenu(); });
+
+            btn.addEventListener("click", (e) => {
+                e.stopPropagation();
+                open ? closeMenu() : openMenu();
+            });
+
             window.addEventListener("resize", () => open && placeMenu());
             window.addEventListener("scroll", () => open && placeMenu(), true);
-            document.addEventListener("click", (e) => { if (!open) return; if (e.target === btn || menu.contains(e.target)) return; closeMenu(); });
-            document.addEventListener("keydown", (e) => { if (e.key === "Escape" && open) closeMenu(); });
-            menu.addEventListener("keydown", (e) => { if (e.key === "Tab") closeMenu(); });
+
+            document.addEventListener("click", (e) => {
+                if (!open) return;
+                if (e.target === btn || menu.contains(e.target)) return;
+                closeMenu();
+            });
+
+            document.addEventListener("keydown", (e) => {
+                if (e.key === "Escape" && open) closeMenu();
+            });
+
+            menu.addEventListener("keydown", (e) => {
+                if (e.key === "Tab") closeMenu();
+            });
         })();
     </script>
 
@@ -420,6 +449,7 @@
             if (!btn || !panel) return;
 
             let open = false;
+
             function show() {
                 panel.classList.remove('mm-enter', 'mm-leave-active');
                 panel.classList.add('mm-enter-active');
@@ -428,28 +458,43 @@
                 btn.setAttribute('aria-expanded', 'true');
                 open = true;
             }
+
             function hide() {
                 panel.classList.remove('mm-enter-active');
                 panel.classList.add('mm-leave', 'mm-leave-active');
+
                 setTimeout(() => {
                     panel.classList.remove('mm-leave', 'mm-leave-active');
                     panel.classList.add('mm-enter');
-                    panel.style.transform = 'scaleY(0)');
-            }, 120);
-            btn.setAttribute('aria-expanded', 'false');
-            open = false;
-        }
-                panel.style.transform = 'scaleY(0)';
-        btn.addEventListener('click', () => open ? hide() : show());
-        panel.addEventListener('click', (e) => {
-            const t = e.target;
-            if (t && t.matches('[data-tab]')) hide();
-        });
-            }) ();
+                    panel.style.transform = 'scaleY(0)';
+                }, 120);
+
+                btn.setAttribute('aria-expanded', 'false');
+                open = false;
+            }
+
+            // Initialize collapsed
+            panel.style.transform = 'scaleY(0)';
+
+            // Toggle open/close
+            btn.addEventListener('click', () => {
+                open ? hide() : show();
+            });
+
+            // Close when a nav item is clicked
+            panel.addEventListener('click', (e) => {
+                const t = e.target;
+                if (t && t.matches('[data-tab]')) {
+                    hide();
+                }
+            });
+        })();
     </script>
 
     <!-- jsPDF + your components -->
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+
+    <!-- Your component logic files -->
     <script src="components/main.js"></script>
     <script src="components/nav.js"></script>
     <script src="components/PhaseScreen.js"></script>
@@ -457,7 +502,6 @@
     <script src="components/Affiliates.js"></script>
     <script src="components/Spotlight.js"></script>
     <script src="components/Docs.js"></script>
-    <!-- NEW: Invoice generation logic -->
     <script src="components/Invoices.js"></script>
 </body>
 </html>
