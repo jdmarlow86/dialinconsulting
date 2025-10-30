@@ -14,6 +14,9 @@
         location.hash = name;
     }
 
+    // expose for other modules (Support overlay, quick links)
+    window.showTab = showTab;
+
     // navbar buttons
     document.querySelectorAll("[data-tab]").forEach(btn => {
         btn.addEventListener("click", () => {
