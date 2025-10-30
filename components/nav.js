@@ -1,9 +1,6 @@
-// components/nav.js
 (function () {
-    // all tab panes
     const panes = Array.from(document.querySelectorAll(".tab-pane"));
 
-    // showTab: hide all panes, show the selected one
     function showTab(name) {
         panes.forEach(pane => {
             if (pane.id === `tab-${name}`) {
@@ -13,17 +10,11 @@
             }
         });
 
-        // highlight active tab in header nav (desktop + mobile)
-        document.querySelectorAll("[data-tab]").forEach(btn => {
-            const isActive = btn.getAttribute("data-tab") === name;
-            btn.classList.toggle("bg-neutral-800", isActive);
-        });
-
-        // update hash so you can deep link like #phase
-        window.location.hash = name;
+        // optional: keep hash in URL
+        location.hash = name;
     }
 
-    // wire desktop+mobile nav buttons
+    // navbar buttons
     document.querySelectorAll("[data-tab]").forEach(btn => {
         btn.addEventListener("click", () => {
             const target = btn.getAttribute("data-tab");
@@ -31,18 +22,12 @@
         });
     });
 
-    // wire dashboard tiles and any [data-tab-jump]
+    // dashboard tiles & quick jumps
     document.querySelectorAll("[data-tab-jump]").forEach(el => {
         el.addEventListener("click", () => {
             const target = el.getAttribute("data-tab-jump");
             showTab(target);
         });
-    });
-
-    // react to manual hash changes
-    window.addEventListener("hashchange", () => {
-        const hash = window.location.hash.replace(/^#/, "") || "home";
-        showTab(hash);
     });
 
     // footer year
@@ -51,7 +36,13 @@
         y.textContent = new Date().getFullYear();
     }
 
-    // initial tab on load
-    const initial = window.location.hash.replace(/^#/, "") || "home";
+    // default tab = hash or home
+    const initial = (location.hash || "#home").slice(1);
     showTab(initial);
+
+    // ALSO listen for back/forward
+    window.addEventListener("hashchange", () => {
+        const t = (location.hash || "#home").slice(1);
+        showTab(t);
+    });
 })();

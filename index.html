@@ -465,11 +465,11 @@
             menu.tabIndex = -1;
             menu.className = "fixed z-50 w-48 bg-neutral-900 border border-neutral-700 rounded-lg shadow-xl outline-none opacity-0 scale-95 pointer-events-none transition duration-150 ease-out transform origin-top-right";
             menu.innerHTML = `
-                        <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
-                        <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
-                        <a href="https://bsky.app/profile/dialinconsulting.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
-                        <a href="https://www.facebook.com/profile.php?id=61582532870440" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">Facebook</a>
-                    `;
+                            <a href="https://discord.gg/7DDpsa5NUb" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-t-lg">Discord</a>
+                            <a href="#" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700">WhatsApp (soon)</a>
+                            <a href="https://bsky.app/profile/dialinconsulting.bsky.social" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">BluSky</a>
+                            <a href="https://www.facebook.com/profile.php?id=61582532870440" target="_blank" role="menuitem" class="block px-4 py-2 text-sm hover:bg-neutral-700 rounded-b-lg">Facebook</a>
+                        `;
             document.body.appendChild(menu);
 
             let open = false;
@@ -573,17 +573,22 @@
         })();
     </script>
 
-    <!-- jsPDF + your components -->
+    <!-- jsPDF (must come before anything that uses jsPDF) -->
     <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 
-    <!-- Your component logic files -->
-    <script src="components/main.js"></script>
-    <script src="components/PhaseScreen.js"></script>
-    <script src="components/Support.js"></script>
-    <script src="components/Affiliates.js"></script>
-    <script src="components/Spotlight.js"></script>
-    <script src="components/invoices.js"></script>
-    <script src="components/Docs.js"></script>
+    <!-- Tab/nav wiring FIRST so clicks work everywhere -->
     <script src="components/nav.js"></script>
+
+    <!-- Core app logic that touches multiple tabs -->
+    <script src="components/main.js"></script>
+
+    <!-- Feature tabs that render into their own sections -->
+    <script src="components/PhaseScreen.js"></script>
+    <script src="components/Affiliates.js"></script>
+    <script src="components/Support.js"></script>
+    <script src="components/Spotlight.js"></script>
+    <script src="components/Docs.js"></script>
+    <script src="components/Invoices.js"></script>
+
 </body>
 </html>
