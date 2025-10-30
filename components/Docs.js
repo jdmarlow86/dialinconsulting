@@ -14,6 +14,12 @@
     const clearDraftBtn = pane.querySelector('#docsClearDraft');
     const previewBox = pane.querySelector('#docsPreviewBox');
 
+    // Quick bail if core UI is missing
+    if (!tplSel || !form || !previewBox) {
+        console.warn('[Docs] Required elements not found; Docs tab disabled.');
+        return;
+    }
+
     // Fields
     const F = (id) => pane.querySelector('#' + id);
     const fields = [
@@ -35,18 +41,32 @@
             if (!raw) return;
             const data = JSON.parse(raw);
             fields.forEach(k => { if (F(k) && data[k] != null) F(k).value = data[k]; });
-            if (data.template) tplSel.value = data.template;
+            if (data.template && tplSel) tplSel.value = data.template;
         } catch { }
     }
     function clearDraft() {
         try { localStorage.removeItem(KEY); } catch { }
     }
 
-    // Auto-save
-    pane.addEventListener('input', () => saveDraft());
-    tplSel.addEventListener('change', () => saveDraft());
+    // helper fns
+    function fmtDate(v) {
+        if (!v) return '';
+        try { return new Date(v).toLocaleDateString(); } catch { return v; }
+    }
+    function indent(txt) {
+        return (txt || '').split('\n').map(l => '  ' + l).join('\n');
+    }
+    function ipClause(opt) {
+        switch ((opt || '').toLowerCase()) {
+            case 'consultant':
+                return 'Consultant retains ownership; Client receives a perpetual, worldwide, royalty-free license to use the Work Product for its internal business.';
+            case 'workmade':
+                return 'Work Product is a “work made for hire,” owned by Client. To the extent not a work made for hire, Consultant assigns all right, title, and interest to Client.';
+            default:
+                return 'Client owns the Work Product upon full payment; Consultant retains tools, know-how, and pre-existing materials.';
+        }
+    }
 
-    // Templates
     const templates = {
         consulting: (d) => {
             const today = new Date().toLocaleDateString();
@@ -190,24 +210,6 @@ Date:  _______________________      Date:  _______________________
         }
     };
 
-    function fmtDate(v) {
-        if (!v) return '';
-        try { return new Date(v).toLocaleDateString(); } catch { return v; }
-    }
-    function indent(txt) {
-        return (txt || '').split('\n').map(l => '  ' + l).join('\n');
-    }
-    function ipClause(opt) {
-        switch ((opt || '').toLowerCase()) {
-            case 'consultant':
-                return 'Consultant retains ownership; Client receives a perpetual, worldwide, royalty-free license to use the Work Product for its internal business.';
-            case 'workmade':
-                return 'Work Product is a “work made for hire,” owned by Client. To the extent not a work made for hire, Consultant assigns all right, title, and interest to Client.';
-            default:
-                return 'Client owns the Work Product upon full payment; Consultant retains tools, know-how, and pre-existing materials.';
-        }
-    }
-
     function collect() {
         const d = {};
         fields.forEach(k => d[k] = (F(k)?.value || '').trim());
@@ -236,7 +238,6 @@ Date:  _______________________      Date:  _______________________
     }
 
     function downloadPdf(filename, text) {
-        // Use jsPDF already loaded globally
         const { jsPDF } = window.jspdf || {};
         if (!jsPDF) {
             alert('PDF library not loaded.');
@@ -261,37 +262,55 @@ Date:  _______________________      Date:  _______________________
         doc.save(filename);
     }
 
-    // Events
-    previewBtn.addEventListener('click', () => showPreview());
-    mdBtn.addEventListener('click', () => {
-        const d = collect();
-        const text = buildText(d);
-        const fname = fileNameFor(d) + '.md';
-        downloadMd(fname, text);
-    });
-    pdfBtn.addEventListener('click', () => {
-        const d = collect();
-        const text = buildText(d);
-        const fname = fileNameFor(d) + '.pdf';
-        downloadPdf(fname, text);
-    });
-    resetBtn.addEventListener('click', () => {
-        form.reset();
-        saveDraft();
-        showPreview();
-    });
-    clearDraftBtn.addEventListener('click', () => {
-        clearDraft();
-        alert('Draft cleared.');
-    });
-
     function fileNameFor(d) {
         const base = (d.template || 'consulting')
             + '_' + (d.clientName || 'client').replace(/\s+/g, '-');
         return base.toLowerCase();
     }
 
-    // Initialize
+    // Wire events ONLY if the element exists
+    if (previewBtn) {
+        previewBtn.addEventListener('click', showPreview);
+    }
+
+    if (mdBtn) {
+        mdBtn.addEventListener('click', () => {
+            const d = collect();
+            const text = buildText(d);
+            const fname = fileNameFor(d) + '.md';
+            downloadMd(fname, text);
+        });
+    }
+
+    if (pdfBtn) {
+        pdfBtn.addEventListener('click', () => {
+            const d = collect();
+            const text = buildText(d);
+            const fname = fileNameFor(d) + '.pdf';
+            downloadPdf(fname, text);
+        });
+    }
+
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            form.reset();
+            saveDraft();
+            showPreview();
+        });
+    }
+
+    if (clearDraftBtn) {
+        clearDraftBtn.addEventListener('click', () => {
+            clearDraft();
+            alert('Draft cleared.');
+        });
+    }
+
+    // auto-save on any input
+    pane.addEventListener('input', saveDraft);
+    tplSel.addEventListener('change', saveDraft);
+
+    // init
     loadDraft();
     showPreview();
 })();
