@@ -1,10 +1,10 @@
 // components/nav.js
-
 (function () {
-    // grab all tab panes
+    // All tab panes in the DOM
     const panes = Array.from(document.querySelectorAll(".tab-pane"));
 
     function showTab(name) {
+        // Show the requested tab, hide the rest
         panes.forEach(pane => {
             if (pane.id === `tab-${name}`) {
                 pane.classList.remove("hidden");
@@ -12,9 +12,12 @@
                 pane.classList.add("hidden");
             }
         });
+
+        // Keep URL hash synced for reload / bookmarking
+        window.location.hash = name;
     }
 
-    // nav bar buttons (desktop + mobile)
+    // Handle clicks from desktop/mobile nav bars
     document.querySelectorAll("[data-tab]").forEach(btn => {
         btn.addEventListener("click", () => {
             const target = btn.getAttribute("data-tab");
@@ -22,7 +25,7 @@
         });
     });
 
-    // dashboard tiles & quick jumps
+    // Handle clicks from dashboard tiles, Schedule button, etc.
     document.querySelectorAll("[data-tab-jump]").forEach(el => {
         el.addEventListener("click", () => {
             const target = el.getAttribute("data-tab-jump");
@@ -30,12 +33,20 @@
         });
     });
 
-    // footer year
+    // Allow deep links like #phase or #invoices
+    function initFromHash() {
+        const hash = window.location.hash.replace(/^#/, "") || "home";
+        showTab(hash);
+    }
+
+    window.addEventListener("hashchange", initFromHash);
+
+    // Footer year
     const y = document.getElementById("year");
     if (y) {
         y.textContent = new Date().getFullYear();
     }
 
-    // default view on load
-    showTab("home");
+    // First load
+    initFromHash();
 })();
