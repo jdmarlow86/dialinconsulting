@@ -1,4 +1,6 @@
 // ======= Spotlight Feature =======
+const PLACEHOLDER_PHOTO = "assets/spotlight-placeholder.svg";
+
 document.addEventListener("DOMContentLoaded", () => {
     const root = document.getElementById("tab-spotlight");
     if (!root) return;
@@ -19,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             <section id="spotlightDisplay" class="hidden rounded-xl border border-neutral-800 bg-neutral-900/60 p-5 sm:p-6">
                 <div class="flex flex-col sm:flex-row gap-4">
-                    <img id="spotlightPhoto" src="https://via.placeholder.com/120" alt="Spotlight" class="w-24 h-24 rounded-xl border border-neutral-800 object-cover" />
+                    <img id="spotlightPhoto" src="${PLACEHOLDER_PHOTO}" alt="Spotlight" class="w-24 h-24 rounded-xl border border-neutral-800 object-cover" />
                     <div class="flex-1">
                         <h3 id="spotlightName" class="text-lg font-semibold"></h3>
                         <p class="text-sm text-neutral-400">
@@ -140,7 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
         el.empty?.classList.add("hidden");
         el.display.classList.remove("hidden");
 
-        if (el.photo) el.photo.src = spotlight.photo || "https://via.placeholder.com/120";
+        if (el.photo) el.photo.src = spotlight.photo || PLACEHOLDER_PHOTO;
         if (el.name) el.name.textContent = spotlight.name || "";
         if (el.email) {
             if (spotlight.email) {
@@ -210,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
             name: "Alex Johnson",
             email: "alex.johnson@example.com",
             specialty: "Small Business Strategy",
-            photo: "https://via.placeholder.com/120",
+            photo: PLACEHOLDER_PHOTO,
             quote: "Dial in Consulting helped me refine my business goals.",
             created: Date.now(),
         });

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-labelledby="title desc">
+  <title id="title">Affiliate placeholder image</title>
+  <desc id="desc">Neutral gradient background with the text Affiliate Spotlight in the center.</desc>
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1f2937" />
+      <stop offset="100%" stop-color="#111827" />
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" fill="url(#grad)" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="48" fill="#9ca3af" letter-spacing="4">
+    AFFILIATE
+  </text>
+  <text x="50%" y="62%" dominant-baseline="middle" text-anchor="middle" font-family="'Inter', 'Segoe UI', sans-serif" font-size="24" fill="#6b7280" letter-spacing="2">
+    SPOTLIGHT
+  </text>
+</svg>

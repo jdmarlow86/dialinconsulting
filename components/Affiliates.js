@@ -1,4 +1,6 @@
 // ======= Affiliate Directory =======
+const PLACEHOLDER_IMAGE = "assets/affiliate-placeholder.svg";
+
 const AFFILIATES = [
     {
         name: "My Bible Belt",
@@ -14,7 +16,7 @@ const AFFILIATES = [
         site: "https://example.com/ethub",
         email: "team@ethub.local",
         phone: "555-555-0101",
-        image: "https://via.placeholder.com/300x180?text=ETHub",
+        image: PLACEHOLDER_IMAGE,
     },
     {
         name: "Dial-In Media",
@@ -22,7 +24,7 @@ const AFFILIATES = [
         site: "https://example.com/dialin-media",
         email: "info@dialinmedia.com",
         phone: "423-555-2025",
-        image: "assets/affiliates/dialin-media.jpg",
+        image: PLACEHOLDER_IMAGE,
     },
     {
         name: "FaithCoin",
@@ -30,7 +32,7 @@ const AFFILIATES = [
         site: "https://example.com/faithcoin",
         email: "hello@faithcoin.org",
         phone: "555-432-8765",
-        image: "https://via.placeholder.com/300x180?text=FaithCoin",
+        image: PLACEHOLDER_IMAGE,
     },
 ];
 
@@ -119,7 +121,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const safeEmail = escapeHtml(item.email || "");
         const safePhone = escapeHtml(item.phone || "");
         const safeSite = item.site ? escapeHtml(item.site) : "";
-        const safeImage = escapeHtml(item.image || "https://via.placeholder.com/600x360?text=Affiliate");
+        const safeImage = escapeHtml(item.image || PLACEHOLDER_IMAGE);
         const telHref = item.phone ? `tel:${item.phone.replace(/[^0-9+]/g, "")}` : "";
         const hasSite = Boolean(safeSite);
         return `
