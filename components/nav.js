@@ -1,10 +1,10 @@
 // components/nav.js
 (function () {
-    // All tab panes in the DOM
+    // all tab panes
     const panes = Array.from(document.querySelectorAll(".tab-pane"));
 
+    // showTab: hide all panes, show the selected one
     function showTab(name) {
-        // Show the requested tab, hide the rest
         panes.forEach(pane => {
             if (pane.id === `tab-${name}`) {
                 pane.classList.remove("hidden");
@@ -13,11 +13,17 @@
             }
         });
 
-        // Keep URL hash synced for reload / bookmarking
+        // highlight active tab in header nav (desktop + mobile)
+        document.querySelectorAll("[data-tab]").forEach(btn => {
+            const isActive = btn.getAttribute("data-tab") === name;
+            btn.classList.toggle("bg-neutral-800", isActive);
+        });
+
+        // update hash so you can deep link like #phase
         window.location.hash = name;
     }
 
-    // Handle clicks from desktop/mobile nav bars
+    // wire desktop+mobile nav buttons
     document.querySelectorAll("[data-tab]").forEach(btn => {
         btn.addEventListener("click", () => {
             const target = btn.getAttribute("data-tab");
@@ -25,7 +31,7 @@
         });
     });
 
-    // Handle clicks from dashboard tiles, Schedule button, etc.
+    // wire dashboard tiles and any [data-tab-jump]
     document.querySelectorAll("[data-tab-jump]").forEach(el => {
         el.addEventListener("click", () => {
             const target = el.getAttribute("data-tab-jump");
@@ -33,20 +39,19 @@
         });
     });
 
-    // Allow deep links like #phase or #invoices
-    function initFromHash() {
+    // react to manual hash changes
+    window.addEventListener("hashchange", () => {
         const hash = window.location.hash.replace(/^#/, "") || "home";
         showTab(hash);
-    }
+    });
 
-    window.addEventListener("hashchange", initFromHash);
-
-    // Footer year
+    // footer year
     const y = document.getElementById("year");
     if (y) {
         y.textContent = new Date().getFullYear();
     }
 
-    // First load
-    initFromHash();
+    // initial tab on load
+    const initial = window.location.hash.replace(/^#/, "") || "home";
+    showTab(initial);
 })();
