@@ -7,20 +7,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button id="supportClose" class="absolute top-3 right-3 text-neutral-400 hover:text-neutral-200" aria-label="Close support dialog">
                     &times;
                 </button>
-                <h2 class="text-lg font-semibold mb-3">Need a hand?</h2>
+                <h2 class="text-lg font-semibold mb-3">Support Dial in Consulting</h2>
                 <p class="text-neutral-300 text-sm mb-4">
-                    Quick links and resources to get help from Dial in Consulting.
+                    Choose a payment option below to contribute directly.
                 </p>
                 <div class="grid gap-3">
-                    <a data-support-link href="mailto:dial.in.consulting@gmail.com" class="px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800">
-                        Email Support
+                    <a data-support-link href="https://cash.app/$jdmarlow" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 transition">
+                        <span class="block font-medium">Cash App</span>
+                        <span class="block text-xs text-neutral-400">$jdmarlow</span>
                     </a>
-                    <a data-support-link href="tel:14239121038" class="px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800">
-                        Call 423-912-1038
+                    <a data-support-link href="https://account.venmo.com/u/Jonathan-Marlow-19" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 transition">
+                        <span class="block font-medium">Venmo</span>
+                        <span class="block text-xs text-neutral-400">@Jonathan-Marlow-19</span>
                     </a>
-                    <button data-support-link data-support-schedule type="button" class="px-4 py-2 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800">
-                        Schedule a Call
-                    </button>
+                    <a data-support-link href="https://www.paypal.com/paypalme/jdmarlow86" target="_blank" rel="noopener noreferrer" class="px-4 py-3 rounded-lg bg-neutral-900 border border-neutral-800 hover:bg-neutral-800 transition">
+                        <span class="block font-medium">PayPal</span>
+                        <span class="block text-xs text-neutral-400">@jdmarlow86</span>
+                    </a>
                 </div>
             </div>
         `;
@@ -45,10 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     supportCard?.querySelectorAll("[data-support-link]")?.forEach(link => {
         link.addEventListener("click", () => {
-            if (link.hasAttribute("data-support-schedule")) {
-                window.open("https://calendly.com/jonmarlow", "_blank");
-            }
-            window.showTab?.("home");
             supportCard.classList.add("hidden");
         });
     });
